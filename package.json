@@ -24,16 +24,15 @@
     "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
     "lint:ws": "bunx sherif@latest",
     "postinstall-patch": "bun scripts/patch.sh",
-    "start": "concurrently \"bun run start:server\" \"bun run start:web\"",
-    "start:server": "turbo run start -F @acme/server...",
-    "start:web": "turbo run start -F @acme/web...",
+    "start": "bun --filter '*' start",
+    "start:server": "bun --filter @acme/server start",
+    "start:web": "bun --filter @acme/web start",
     "typecheck": "turbo run typecheck",
     "update-deps": "bunx taze --interactive --recursive"
   },
   "prettier": "@acme/prettier-config",
   "devDependencies": {
     "@acme/prettier-config": "workspace:*",
-    "concurrently": "^9.2.1",
     "prettier": "^3.6.2",
     "turbo": "^2.5.6",
     "typescript": "^5.9.2"

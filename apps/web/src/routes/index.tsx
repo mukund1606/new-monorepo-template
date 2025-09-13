@@ -5,9 +5,6 @@ import { useORPC } from "~/orpc/context";
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
-  loader: async ({ context }) => {
-    console.log(context.currentSession);
-  },
 });
 
 const TITLE_TEXT = `
