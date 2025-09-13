@@ -1,0 +1,42 @@
+{
+  "name": "@acme/orpc",
+  "private": true,
+  "imports": {
+    "~/*": "./src/*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./src/index.ts"
+    },
+    "./lib/context": {
+      "types": "./dist/src/lib/context.d.ts",
+      "default": "./src/lib/context.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc && tsc-alias",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc && tsc-alias",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
+  },
+  "prettier": "@acme/prettier-config",
+  "dependencies": {
+    "@acme/auth": "workspace:*",
+    "@acme/db": "workspace:*",
+    "@acme/shared": "workspace:*",
+    "@orpc/server": "^1.8.8",
+    "@orpc/zod": "^1.8.8",
+    "zod": "^4.1.8"
+  },
+  "devDependencies": {
+    "@acme/eslint-config": "workspace:*",
+    "@acme/prettier-config": "workspace:*",
+    "@acme/tsconfig": "workspace:*",
+    "eslint": "^9.35.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2"
+  }
+}

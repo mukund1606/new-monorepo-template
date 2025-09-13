@@ -1,0 +1,43 @@
+{
+  "name": "my-monorepo",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "tooling/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "git clean -xdf node_modules .cache .turbo",
+    "clean:workspaces": "turbo run clean",
+    "db:generate": "turbo -F @acme/db db:generate",
+    "db:migrate": "turbo -F @acme/db db:migrate",
+    "db:push": "turbo -F @acme/db db:push",
+    "db:studio": "turbo -F @acme/db db:studio",
+    "dev": "turbo watch dev --continue",
+    "dev:web": "turbo watch dev -F @acme/web...",
+    "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
+    "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
+    "postinstall": "bun lint:ws && bun postinstall-patch",
+    "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
+    "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
+    "lint:ws": "bunx sherif@latest",
+    "postinstall-patch": "bun scripts/patch.sh",
+    "start": "turbo run start",
+    "typecheck": "turbo run typecheck",
+    "update-deps": "bunx taze --interactive --recursive"
+  },
+  "prettier": "@acme/prettier-config",
+  "devDependencies": {
+    "@acme/prettier-config": "workspace:*",
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.6",
+    "typescript": "^5.9.2"
+  },
+  "packageManager": "pnpm@10.15.1",
+  "engines": {
+    "node": ">=22.19.0",
+    "pnpm": ">=10.15.1"
+  }
+}

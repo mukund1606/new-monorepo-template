@@ -1,0 +1,60 @@
+{
+  "files.watcherExclude": {
+    "pnpm-lock.yaml": true,
+    "bun.lock": true,
+    "**/routeTree.gen.ts": true
+  },
+  "search.exclude": {
+    "pnpm-lock.yaml": true,
+    "bun.lock": true,
+    "**/routeTree.gen.ts": true
+  },
+  "files.readonlyInclude": {
+    "pnpm-lock.yaml": true,
+    "bun.lock": true,
+    "**/routeTree.gen.ts": true
+  },
+
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "tsconfig.json": "tsconfig.*.json, env.d.ts",
+    "app.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
+    "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .prettier*, prettier*, .editorconfig, .gitattributes, bun.lock"
+  },
+
+  // always choose typescript from node_modules
+  "typescript.tsdk": "./node_modules/typescript/lib",
+
+  // use LF line endings
+  "files.eol": "\n",
+
+  // set prettier as default formatter for json, ts, tsx, js, jsx, html, css
+  "[json][jsonc][typescript][typescriptreact][javascript][javascriptreact][html][css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript,typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "editor.formatOnSave": true,
+  "eslint.runtime": "node",
+  "eslint.workingDirectories": [
+    { "pattern": "apps/*/" },
+    { "pattern": "packages/*/" },
+    { "pattern": "configs/*/" }
+  ],
+  "prettier.ignorePath": ".gitignore",
+  "tailwindCSS.classFunctions": ["cva", "cx", "cn"],
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cn\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["clsx\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(((?:[^()]|\\([^()]*\\))*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}

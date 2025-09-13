@@ -1,0 +1,54 @@
+{
+  "name": "@acme/db",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "~/*": "./src/*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./src/index.ts"
+    },
+    "./client": {
+      "types": "./dist/src/client.d.ts",
+      "default": "./src/client.ts"
+    },
+    "./schema": {
+      "types": "./dist/src/schema.d.ts",
+      "default": "./src/schema.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc && tsc-alias",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "db:generate": "bun with-env drizzle-kit generate",
+    "db:migrate": "bun with-env drizzle-kit migrate",
+    "db:push": "bun with-env drizzle-kit push",
+    "db:studio": "bun with-env drizzle-kit studio",
+    "dev": "tsc && tsc-alias",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "with-env": "dotenv -e ../../.env --"
+  },
+  "prettier": "@acme/prettier-config",
+  "dependencies": {
+    "@t3-oss/env-core": "^0.13.8",
+    "drizzle-orm": "^0.44.5",
+    "drizzle-zod": "^0.8.3",
+    "zod": "^4.1.8"
+  },
+  "devDependencies": {
+    "@acme/eslint-config": "workspace:*",
+    "@acme/prettier-config": "workspace:*",
+    "@acme/tsconfig": "workspace:*",
+    "@types/bun": "^1.2.21",
+    "dotenv-cli": "^10.0.0",
+    "drizzle-kit": "^0.31.4",
+    "eslint": "^9.35.0",
+    "prettier": "^3.6.2",
+    "tsc-alias": "^1.8.16",
+    "typescript": "^5.9.2"
+  }
+}

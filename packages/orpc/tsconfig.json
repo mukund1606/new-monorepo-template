@@ -1,0 +1,14 @@
+{
+  "extends": "@acme/tsconfig/compiled-package.json",
+  "compilerOptions": {
+    "types": ["bun"],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  },
+  "exclude": ["dist", "node_modules", "build"],
+  "tsc-alias": {
+    "resolveFullPaths": true
+  }
+}
