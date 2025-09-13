@@ -14,7 +14,7 @@ if [ ! -f "$MARKER_FILE" ]; then
     echo ""
 
     echo "First time package installation detected, starting turbo daemon..."
-    bun turbo daemon start
+    bun turbo daemon restart
     # Ensure .cache directory exists before creating marker file
     mkdir -p .cache
     touch "$MARKER_FILE"

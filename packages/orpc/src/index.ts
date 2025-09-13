@@ -9,14 +9,7 @@ export const appRouter = {
       method: "GET",
       path: "/health",
     })
-    .handler(async ({ context }) => {
-      await new Promise((resolve) => {
-        console.log("Waiting for 1 seconds");
-        setTimeout(() => {
-          console.log("Done waiting");
-          resolve(true);
-        }, 1000);
-      });
+    .handler(({ context }) => {
       context.resHeaders?.set("X-API-Version", "1.0.0");
       return "OK";
     }),
