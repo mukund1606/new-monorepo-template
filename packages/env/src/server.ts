@@ -2,9 +2,11 @@ import { createEnv } from "@t3-oss/env-core";
 import dotenv from "dotenv";
 import { z } from "zod";
 
-dotenv.config({
-  path: "../../.env",
-});
+if (process.env.NODE_ENV === "development") {
+  dotenv.config({
+    path: "../../.env",
+  });
+}
 
 export const serverEnv = createEnv({
   server: {
