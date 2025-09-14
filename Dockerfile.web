@@ -1,0 +1,57 @@
+# Use official Bun runtime as base image
+FROM oven/bun:1 AS base
+
+# Set working directory
+WORKDIR /app
+
+# Copy workspace configuration and lockfile
+COPY package.json bun.lock turbo.json ./
+
+# Copy entire workspace structure to maintain proper workspace resolution
+COPY apps/ ./apps/
+COPY packages/ ./packages/
+COPY tooling/ ./tooling/
+COPY scripts/ ./scripts/
+
+# Install dependencies (this will install all workspace dependencies)
+RUN bun install
+
+# Build the web app
+RUN bunx turbo run build --filter @acme/web
+
+# Production stage
+FROM oven/bun:1-slim AS production
+
+# Set working directory
+WORKDIR /app
+
+# Copy workspace configuration
+COPY package.json turbo.json ./
+
+# Copy lockfile from base stage (after it was updated during build)
+COPY --from=base /app/bun.lock ./
+
+# Copy all built workspace packages and web app
+COPY --from=base /app/apps/web/.output ./apps/web/.output
+COPY --from=base /app/apps/web/package.json ./apps/web/
+COPY --from=base /app/packages ./packages
+COPY --from=base /app/tooling ./tooling
+COPY --from=base /app/scripts ./scripts
+
+# Copy node_modules from base stage for runtime dependencies
+COPY --from=base /app/node_modules ./node_modules
+
+# Also copy node_modules to the web app's expected location
+COPY --from=base /app/node_modules ./apps/web/.output/server/node_modules
+
+# Production dependencies are already installed in base stage
+
+# Expose port
+EXPOSE 3001
+
+# Set environment
+ENV NODE_ENV=production
+ENV PORT=3001
+
+# Start the web server
+CMD ["bun", "--cwd", "apps/web", "start"]

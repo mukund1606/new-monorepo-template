@@ -1,0 +1,38 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    container_name: my-monorepo-server
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3001}
+      - AUTH_SECRET=${AUTH_SECRET:-your-secret-key}
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: my-monorepo-web
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - IS_DOCKER_HOST=true
+      - PORT=3001
+      - VITE_SERVER_URL=${VITE_SERVER_URL:-http://localhost:3000}
+    depends_on:
+      - server
+    restart: unless-stopped
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
