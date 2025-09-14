@@ -15,4 +15,18 @@ export const authConfig = {
     enabled: true,
   },
   plugins: [openAPI()],
+  advanced: {
+    crossSubDomainCookies: {
+      enabled: true,
+    },
+    // cookies: {
+    //   sessionToken: {
+    //     attributes: {
+    //       sameSite: "None",
+    //       secure: true,
+    //       partitioned: true, // New browser standards will mandate this for foreign cookies
+    //     },
+    //   },
+    // },
+  },
 } satisfies BetterAuthOptions;
