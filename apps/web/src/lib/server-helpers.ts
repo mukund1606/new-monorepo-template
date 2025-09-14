@@ -2,7 +2,8 @@ import { createIsomorphicFn, createServerFn } from "@tanstack/react-start";
 import { getWebRequest } from "@tanstack/react-start/server";
 
 import { clientEnv } from "@acme/env/client";
-import { serverEnv } from "@acme/env/server";
+
+// import { serverEnv } from "@acme/env/server";
 
 const getRequestHeaders = createServerFn({ method: "GET" }).handler(() => {
   const request = getWebRequest();
@@ -25,12 +26,13 @@ export const headers = createIsomorphicFn()
 
 export const getServerUrl = createIsomorphicFn()
   .server(() => {
-    console.log("serverEnv.IS_DOCKER_HOST", serverEnv.IS_DOCKER_HOST);
-    return serverEnv.IS_DOCKER_HOST === "true"
-      ? "http://server:3000"
-      : "http://localhost:3000";
+    console.log("server", clientEnv.VITE_SERVER_URL);
+    return clientEnv.VITE_SERVER_URL;
+    // return serverEnv.IS_DOCKER_HOST === "true"
+    //   ? "http://server:3000"
+    //   : "http://localhost:3000";
   })
   .client(() => {
-    console.log("clientEnv.VITE_SERVER_URL", clientEnv.VITE_SERVER_URL);
+    console.log("client", clientEnv.VITE_SERVER_URL);
     return clientEnv.VITE_SERVER_URL;
   });
