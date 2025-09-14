@@ -25,5 +25,8 @@ export const env = createEnv({
     ...import.meta.env,
   },
   emptyStringAsUndefined: true,
-  skipValidation: !!process.env.CI || process.env.npm_lifecycle_event === "lint",
+  skipValidation:
+    !!process.env.CI ||
+    process.env.npm_lifecycle_event === "lint" ||
+    !!process.env.DOCKER_BUILD,
 });

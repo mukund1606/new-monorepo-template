@@ -16,8 +16,8 @@ COPY scripts/ ./scripts/
 # Install dependencies (this will install all workspace dependencies)
 RUN bun install
 
-# Build the web app
-RUN bunx turbo run build --filter @acme/web
+# Build the web app (skip env validation during build)
+RUN DOCKER_BUILD=true bunx turbo run build --filter @acme/web
 
 # Production stage
 FROM oven/bun:1-slim AS production
