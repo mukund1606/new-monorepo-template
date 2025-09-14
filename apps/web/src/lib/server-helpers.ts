@@ -24,15 +24,14 @@ export const headers = createIsomorphicFn()
     "x-orpc-source": "tss-react-client",
   }));
 
-export const getServerUrl = createIsomorphicFn()
-  .server(() => {
-    console.log("server", clientEnv.VITE_SERVER_URL);
-    return clientEnv.VITE_SERVER_URL;
-    // return serverEnv.IS_DOCKER_HOST === "true"
-    //   ? "http://server:3000"
-    //   : "http://localhost:3000";
-  })
-  .client(() => {
-    console.log("client", clientEnv.VITE_SERVER_URL);
-    return clientEnv.VITE_SERVER_URL;
-  });
+export const getServerUrl = () => {
+  let URL = clientEnv.VITE_SERVER_URL;
+  if (typeof window !== "undefined") {
+    URL = clientEnv.VITE_SERVER_URL;
+    console.log("Client URL", URL);
+    return URL;
+  }
+  URL = "http://localhost:3000";
+  console.log("Server URL", URL);
+  return URL;
+};
