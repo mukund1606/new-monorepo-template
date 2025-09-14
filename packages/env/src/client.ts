@@ -12,8 +12,5 @@ export const clientEnv = createEnv({
     ...process.env,
   },
   emptyStringAsUndefined: true,
-  skipValidation:
-    !!process.env.CI ||
-    process.env.npm_lifecycle_event === "lint" ||
-    !!process.env.DOCKER_BUILD,
+  skipValidation: !!process.env.CI || process.env.npm_lifecycle_event === "lint",
 });

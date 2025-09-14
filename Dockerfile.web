@@ -1,6 +1,12 @@
 # Use official Bun runtime as base image
 FROM oven/bun:1
 
+ARG VITE_SERVER_URL
+ARG VITE_BASE_URL
+
+ENV VITE_SERVER_URL=$VITE_SERVER_URL
+ENV VITE_BASE_URL=$VITE_BASE_URL
+
 # Set working directory
 WORKDIR /app
 
@@ -17,7 +23,7 @@ COPY scripts/ ./scripts/
 RUN bun install
 
 # Build the web app (skip env validation during build)
-RUN DOCKER_BUILD=true bunx turbo run build --filter @acme/web
+RUN bunx turbo run build --filter @acme/web
 
 # Expose port
 EXPOSE 3001

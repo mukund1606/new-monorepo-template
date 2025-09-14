@@ -1,3 +1,4 @@
+import path from "path";
 import tailwindcss from "@tailwindcss/vite";
 import { devtools } from "@tanstack/devtools-vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
@@ -11,7 +12,7 @@ export default defineConfig(async ({ mode }) => {
     // eslint-disable-next-line no-restricted-properties
     ...process.env,
     ...import.meta.env,
-    ...loadEnv(mode, process.cwd(), ""),
+    ...loadEnv(mode, path.resolve(process.cwd(), "../../"), ""),
   };
 
   const { clientEnv } = await import("@acme/env/client");
