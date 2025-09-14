@@ -3,11 +3,14 @@ import { z } from "zod";
 
 export const clientEnv = createEnv({
   client: {
-    VITE_SERVER_URL: z.url().default("http://localhost:3000"),
+    VITE_SERVER_URL: z.url(),
     VITE_BASE_URL: z.string().default("/"),
   },
   clientPrefix: "VITE_",
-  runtimeEnv: import.meta.env,
+  runtimeEnv: {
+    ...import.meta.env,
+    ...process.env,
+  },
   emptyStringAsUndefined: true,
   skipValidation:
     !!process.env.CI ||
