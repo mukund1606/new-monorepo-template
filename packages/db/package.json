@@ -22,15 +22,14 @@
   "scripts": {
     "build": "tsc && tsc-alias",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "db:generate": "bun with-env drizzle-kit generate",
-    "db:migrate": "bun with-env drizzle-kit migrate",
-    "db:push": "bun with-env drizzle-kit push",
-    "db:studio": "bun with-env drizzle-kit studio",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
     "dev": "tsc && tsc-alias",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
-    "with-env": "dotenv -e ../../.env --"
+    "typecheck": "tsc --noEmit"
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
@@ -44,7 +43,6 @@
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
     "@types/bun": "^1.2.21",
-    "dotenv-cli": "^10.0.0",
     "drizzle-kit": "^0.31.4",
     "eslint": "^9.35.0",
     "prettier": "^3.6.2",

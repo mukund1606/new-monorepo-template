@@ -18,11 +18,11 @@ import Header from "~/components/header";
 import { Toaster } from "~/components/ui/sonner";
 import appCss from "../index.css?url";
 
-export interface RouterAppContext {
+export type RouterAppContext = {
   orpc: ORPCTanstackQueryUtils;
   queryClient: QueryClient;
   currentSession: Session | null;
-}
+};
 
 export const Route = createRootRouteWithContext<RouterAppContext>()({
   beforeLoad: async ({ context }) => {
@@ -84,6 +84,7 @@ function RootDocument() {
               name: "Drizzle Studio",
               render: () => (
                 <iframe
+                  title="Drizzle Studio"
                   src="https://local.drizzle.studio"
                   style={{
                     flexGrow: 1,

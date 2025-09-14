@@ -1,3 +1,6 @@
-import baseConfig from "@acme/eslint-config/base";
+import baseConfig, {
+  drizzleEslintConfig,
+  restrictEnvAccess,
+} from "@acme/eslint-config/base";
 
-export default [...baseConfig];
+export default [...baseConfig, ...restrictEnvAccess, ...drizzleEslintConfig];

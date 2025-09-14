@@ -17,11 +17,11 @@ function RouteComponent() {
 
   useEffect(() => {
     if (!currentSession) {
-      navigate({
+      void navigate({
         to: "/login",
       });
     }
-  }, [currentSession]);
+  }, [currentSession, navigate]);
 
   return (
     <div>

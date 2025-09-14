@@ -8,9 +8,9 @@ import type { AppRouterClient } from "@acme/orpc";
 
 import { env } from "~/env";
 
-const getRequestHeaders = createServerFn({ method: "GET" }).handler(async () => {
+const getRequestHeaders = createServerFn({ method: "GET" }).handler(() => {
   const request = getWebRequest();
-  const headers = new Headers(request?.headers);
+  const headers = new Headers(request.headers);
 
   return Object.fromEntries(headers);
 });
@@ -27,8 +27,16 @@ const headers = createIsomorphicFn()
     "x-orpc-source": "tss-react-client",
   }));
 
+const getServerUrl = createIsomorphicFn()
+  .server(() => {
+    return env.IS_DOCKER_HOST === "true" ? "http://server:3000" : "http://localhost:3000";
+  })
+  .client(() => {
+    return env.VITE_SERVER_URL;
+  });
+
 const link = new RPCLink({
-  url: env.VITE_SERVER_URL + "/rpc",
+  url: getServerUrl() + "/rpc",
   fetch(url, options) {
     return fetch(url, {
       ...options,

@@ -6,7 +6,10 @@ export const clientEnv = createEnv({
     VITE_SERVER_URL: z.url(),
   },
   clientPrefix: "VITE_",
-  runtimeEnv: process.env && import.meta.env,
+  runtimeEnv: {
+    ...process.env,
+    ...import.meta.env,
+  },
   emptyStringAsUndefined: true,
   skipValidation: !!process.env.CI || process.env.npm_lifecycle_event === "lint",
 });

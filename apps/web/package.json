@@ -3,14 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "bun with-env vite build",
+    "build": "vite build",
     "clean": "git clean -xdf .cache .output .turbo node_modules .nitro .tanstack",
-    "dev": "bun with-env bunx --bun vite --port=3001",
+    "dev": "vite dev --port=3001",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "start": "PORT=3001 bun with-env bun .output/server/index.mjs",
-    "typecheck": "tsc --noEmit",
-    "with-env": "dotenv -e ../../.env --"
+    "start": "PORT=3001 bun .output/server/index.mjs",
+    "typecheck": "tsc --noEmit"
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
@@ -54,7 +53,6 @@
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.2",
-    "dotenv-cli": "^10.0.0",
     "eslint": "^9.35.0",
     "prettier": "^3.6.2",
     "tailwindcss": "^4.1.13",

@@ -5,14 +5,13 @@
     "~/*": "./src/*"
   },
   "scripts": {
-    "build": "bun with-env bun build src/index.ts --outdir ./dist --target bun --minify",
+    "build": "bun build src/index.ts --outdir ./dist --target bun --minify",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "dev": "bun with-env bun run --hot src/index.ts",
+    "dev": "bun run --hot src/index.ts",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "start": "bun with-env bun dist/index.js",
-    "typecheck": "tsc --noEmit",
-    "with-env": "dotenv -e ../../.env --"
+    "start": "bun dist/index.js",
+    "typecheck": "tsc --noEmit"
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
@@ -24,7 +23,7 @@
     "@orpc/server": "^1.8.8",
     "@orpc/zod": "^1.8.8",
     "@t3-oss/env-core": "^0.13.8",
-    "hono": "^4.9.6",
+    "hono": "^4.9.7",
     "zod": "^4.1.8"
   },
   "devDependencies": {
@@ -32,7 +31,6 @@
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
     "@types/bun": "^1.2.21",
-    "dotenv-cli": "^10.0.0",
     "eslint": "^9.35.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.2"

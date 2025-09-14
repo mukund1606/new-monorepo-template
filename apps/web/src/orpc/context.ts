@@ -1,4 +1,4 @@
-import { type RouterUtils } from "@orpc/tanstack-query";
+import type { RouterUtils } from "@orpc/tanstack-query";
 import { createContext, useContext } from "react";
 
 import type { AppRouterClient } from "@acme/orpc";
