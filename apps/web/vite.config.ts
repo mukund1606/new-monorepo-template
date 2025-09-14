@@ -23,11 +23,9 @@ export default defineConfig(async ({ mode }) => {
       tailwindcss(),
       tanstackStart({
         customViteReactPlugin: true,
-        target: "bun",
+        target: "node-server",
       }),
-      viteReact({
-        jsxRuntime: "automatic",
-      }),
+      viteReact(),
     ],
   };
 });
