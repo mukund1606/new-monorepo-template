@@ -25,10 +25,12 @@ export const headers = createIsomorphicFn()
 
 export const getServerUrl = createIsomorphicFn()
   .server(() => {
+    console.log("serverEnv.IS_DOCKER_HOST", serverEnv.IS_DOCKER_HOST);
     return serverEnv.IS_DOCKER_HOST === "true"
       ? "http://server:3000"
       : "http://localhost:3000";
   })
   .client(() => {
+    console.log("clientEnv.VITE_SERVER_URL", clientEnv.VITE_SERVER_URL);
     return clientEnv.VITE_SERVER_URL;
   });
