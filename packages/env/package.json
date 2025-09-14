@@ -6,9 +6,13 @@
     "~/*": "./src/*"
   },
   "exports": {
-    ".": {
-      "types": "./dist/src/index.d.ts",
-      "default": "./src/index.ts"
+    "./server": {
+      "types": "./dist/src/server.d.ts",
+      "default": "./src/server.ts"
+    },
+    "./client": {
+      "types": "./dist/src/client.d.ts",
+      "default": "./src/client.ts"
     }
   },
   "scripts": {
@@ -22,7 +26,7 @@
   "prettier": "@acme/prettier-config",
   "dependencies": {
     "@t3-oss/env-core": "^0.13.8",
-    "dotenv-mono": "^1.5.1",
+    "dotenv": "^17.2.2",
     "zod": "^4.1.8"
   },
   "devDependencies": {

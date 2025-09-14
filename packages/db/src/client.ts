@@ -1,7 +1,7 @@
 import { SQL } from "bun";
 import { drizzle } from "drizzle-orm/bun-sql";
 
-import { env } from "@acme/env";
+import { serverEnv } from "@acme/env/server";
 
 import * as schema from "~/schema";
 
@@ -12,10 +12,10 @@ const globalForDb = globalThis as unknown as {
 const conn =
   globalForDb.conn ??
   new SQL({
-    url: env.DATABASE_URL,
+    url: serverEnv.DATABASE_URL,
   });
 
-if (env.NODE_ENV !== "production") globalForDb.conn = conn;
+if (serverEnv.NODE_ENV !== "production") globalForDb.conn = conn;
 
 export const db = drizzle(conn, { schema });
 

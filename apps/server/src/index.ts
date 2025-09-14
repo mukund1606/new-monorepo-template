@@ -9,7 +9,7 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 
 import { auth } from "@acme/auth";
-import { env } from "@acme/env";
+import { serverEnv } from "@acme/env/server";
 import { appRouter } from "@acme/orpc";
 
 const app = new Hono();
@@ -19,7 +19,7 @@ app.use(logger());
 app.use(
   "/*",
   cors({
-    origin: env.CORS_ORIGIN,
+    origin: serverEnv.CORS_ORIGIN,
     credentials: true,
   }),
 );

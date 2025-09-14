@@ -1,10 +1,12 @@
 import { createEnv } from "@t3-oss/env-core";
-import { dotenvLoad } from "dotenv-mono";
+import dotenv from "dotenv";
 import { z } from "zod";
 
-dotenvLoad();
+dotenv.config({
+  path: "../../.env",
+});
 
-export const env = createEnv({
+export const serverEnv = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
     IS_DOCKER_HOST: z.enum(["true", "false"]).default("false"),
@@ -16,15 +18,7 @@ export const env = createEnv({
         ? z.string().min(1)
         : z.string().min(1).optional(),
   },
-  client: {
-    VITE_SERVER_URL: z.url(),
-    VITE_BASE_URL: z.string().default("/"),
-  },
-  clientPrefix: "VITE_",
-  runtimeEnv: {
-    ...process.env,
-    ...import.meta.env,
-  },
+  runtimeEnv: process.env,
   emptyStringAsUndefined: true,
   skipValidation:
     !!process.env.CI ||

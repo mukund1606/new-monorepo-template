@@ -5,7 +5,8 @@ import { createIsomorphicFn, createServerFn } from "@tanstack/react-start";
 import { getWebRequest } from "@tanstack/react-start/server";
 
 import type { AppRouterClient } from "@acme/orpc";
-import { env } from "@acme/env";
+import { clientEnv } from "@acme/env/client";
+import { serverEnv } from "@acme/env/server";
 
 const getRequestHeaders = createServerFn({ method: "GET" }).handler(() => {
   const request = getWebRequest();
@@ -28,10 +29,12 @@ const headers = createIsomorphicFn()
 
 const getServerUrl = createIsomorphicFn()
   .server(() => {
-    return env.IS_DOCKER_HOST === "true" ? "http://server:3000" : "http://localhost:3000";
+    return serverEnv.IS_DOCKER_HOST === "true"
+      ? "http://server:3000"
+      : "http://localhost:3000";
   })
   .client(() => {
-    return env.VITE_SERVER_URL;
+    return clientEnv.VITE_SERVER_URL;
   });
 
 const link = new RPCLink({
