@@ -1,0 +1,29 @@
+# Single container for both web and server
+FROM oven/bun:1
+
+# Set working directory
+WORKDIR /app
+
+# Copy workspace configuration and lockfile
+COPY . .
+
+# Install dependencies (this will install all workspace dependencies)
+RUN bun install
+
+# Install PM2 globally for process management
+RUN bun add -g pm2
+
+# Build all applications
+RUN DOCKER_BUILD=true bunx turbo run build
+
+# Copy PM2 ecosystem config
+COPY ecosystem.config.js ./
+
+# Expose ports for both services
+EXPOSE 3000 3001
+
+# Set environment
+ENV NODE_ENV=production
+
+# Start both services using PM2
+CMD ["pm2-runtime", "ecosystem.config.js"]

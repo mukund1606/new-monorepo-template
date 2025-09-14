@@ -1,5 +1,5 @@
 # Use official Bun runtime as base image
-FROM oven/bun:1 AS base
+FROM oven/bun:1
 
 # Set working directory
 WORKDIR /app
@@ -18,30 +18,6 @@ RUN bun install
 
 # Build the server (skip env validation during build)
 RUN DOCKER_BUILD=true bunx turbo run build --filter @acme/server
-
-# Production stage
-FROM oven/bun:1-slim AS production
-
-# Set working directory
-WORKDIR /app
-
-# Copy workspace configuration
-COPY package.json turbo.json ./
-
-# Copy lockfile from base stage (after it was updated during build)
-COPY --from=base /app/bun.lock ./
-
-# Copy all built workspace packages
-COPY --from=base /app/apps/server/dist ./apps/server/dist
-COPY --from=base /app/apps/server/package.json ./apps/server/
-COPY --from=base /app/packages ./packages
-COPY --from=base /app/tooling ./tooling
-COPY --from=base /app/scripts ./scripts
-
-# Copy node_modules from base stage for runtime dependencies
-COPY --from=base /app/node_modules ./node_modules
-
-# Production dependencies are already installed in base stage
 
 # Expose port
 EXPOSE 3000
