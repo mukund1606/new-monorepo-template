@@ -56,11 +56,11 @@ services:
       - "3001:3001"
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=${DATABASE_URL}
-      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3001}
-      - AUTH_SECRET=${AUTH_SECRET:-your-secret-key}
       - VITE_SERVER_URL=${VITE_SERVER_URL:-http://localhost:3000}
       - VITE_BASE_URL=${VITE_BASE_URL:-/}
+      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3001}
+      - DATABASE_URL=${DATABASE_URL}
+      - AUTH_SECRET=${AUTH_SECRET:-your-secret-key}
     restart: unless-stopped
     networks:
       - app-network
