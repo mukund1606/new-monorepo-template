@@ -14,9 +14,10 @@ export default defineConfig(async ({ mode }) => {
     ...loadEnv(mode, process.cwd(), ""),
   };
 
-  await import("@acme/env");
+  const { env } = await import("@acme/env");
 
   return {
+    base: env.VITE_BASE_URL,
     plugins: [
       devtools(),
       viteTsConfigPaths(),
