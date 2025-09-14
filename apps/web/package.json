@@ -15,12 +15,12 @@
   "dependencies": {
     "@acme/auth": "workspace:*",
     "@acme/db": "workspace:*",
+    "@acme/env": "workspace:*",
     "@acme/orpc": "workspace:*",
     "@acme/shared": "workspace:*",
     "@orpc/client": "^1.8.8",
     "@orpc/tanstack-query": "^1.8.8",
     "@radix-ui/react-accordion": "^1.2.12",
-    "@t3-oss/env-core": "^0.13.8",
     "@tanstack/devtools-vite": "^0.2.13",
     "@tanstack/react-devtools": "^0.6.7",
     "@tanstack/react-form": "^1.20.0",

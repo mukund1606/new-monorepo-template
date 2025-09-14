@@ -5,8 +5,7 @@ import { createIsomorphicFn, createServerFn } from "@tanstack/react-start";
 import { getWebRequest } from "@tanstack/react-start/server";
 
 import type { AppRouterClient } from "@acme/orpc";
-
-import { env } from "~/env";
+import { env } from "@acme/env";
 
 const getRequestHeaders = createServerFn({ method: "GET" }).handler(() => {
   const request = getWebRequest();

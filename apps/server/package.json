@@ -17,12 +17,12 @@
   "dependencies": {
     "@acme/auth": "workspace:*",
     "@acme/db": "workspace:*",
+    "@acme/env": "workspace:*",
     "@acme/orpc": "workspace:*",
     "@acme/shared": "workspace:*",
     "@orpc/openapi": "^1.8.8",
     "@orpc/server": "^1.8.8",
     "@orpc/zod": "^1.8.8",
-    "@t3-oss/env-core": "^0.13.8",
     "hono": "^4.9.7",
     "zod": "^4.1.8"
   },

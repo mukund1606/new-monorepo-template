@@ -9,9 +9,8 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 
 import { auth } from "@acme/auth";
+import { env } from "@acme/env";
 import { appRouter } from "@acme/orpc";
-
-import { env } from "~/env";
 
 const app = new Hono();
 

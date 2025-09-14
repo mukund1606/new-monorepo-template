@@ -14,7 +14,7 @@ export default defineConfig(async ({ mode }) => {
     ...loadEnv(mode, process.cwd(), ""),
   };
 
-  await import("./src/env");
+  await import("@acme/env");
 
   return {
     plugins: [

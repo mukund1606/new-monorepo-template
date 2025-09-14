@@ -30,7 +30,7 @@
   "prettier": "@acme/prettier-config",
   "dependencies": {
     "@acme/db": "workspace:*",
-    "@t3-oss/env-core": "^0.13.8",
+    "@acme/env": "workspace:*",
     "better-auth": "^1.3.9",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

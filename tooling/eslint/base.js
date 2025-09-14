@@ -13,30 +13,29 @@ import tseslint from "typescript-eslint";
 /**
  * All packages that leverage t3-env should use this rule
  */
-export const restrictEnvAccess = defineConfig(
-  { ignores: ["**/env.ts", "**/env.client.ts", "**/env.server.ts"] },
-  {
-    files: ["**/*.js", "**/*.ts", "**/*.tsx"],
-    rules: {
-      "no-restricted-properties": [
-        "error",
-        {
-          object: "process",
-          property: "env",
-          message: "Use `import { env } from '~/env'` instead to ensure validated types.",
-        },
-      ],
-      "no-restricted-imports": [
-        "error",
-        {
-          name: "process",
-          importNames: ["env"],
-          message: "Use `import { env } from '~/env'` instead to ensure validated types.",
-        },
-      ],
-    },
+export const restrictEnvAccess = defineConfig({
+  files: ["**/*.js", "**/*.ts", "**/*.tsx"],
+  rules: {
+    "no-restricted-properties": [
+      "error",
+      {
+        object: "process",
+        property: "env",
+        message:
+          "Use `import { env } from '@acme/env'` instead to ensure validated types.",
+      },
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        name: "process",
+        importNames: ["env"],
+        message:
+          "Use `import { env } from '@acme/env'` instead to ensure validated types.",
+      },
+    ],
   },
-);
+});
 
 /**
  * All packages that leverage drizzle should use this rule

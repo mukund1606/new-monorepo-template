@@ -1,7 +1,8 @@
 import { SQL } from "bun";
 import { drizzle } from "drizzle-orm/bun-sql";
 
-import { env } from "~/env";
+import { env } from "@acme/env";
+
 import * as schema from "~/schema";
 
 const globalForDb = globalThis as unknown as {
