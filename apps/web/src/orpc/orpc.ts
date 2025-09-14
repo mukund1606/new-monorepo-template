@@ -1,41 +1,10 @@
 import { createORPCClient } from "@orpc/client";
 import { RPCLink } from "@orpc/client/fetch";
 import { createTanstackQueryUtils } from "@orpc/tanstack-query";
-import { createIsomorphicFn, createServerFn } from "@tanstack/react-start";
-import { getWebRequest } from "@tanstack/react-start/server";
 
 import type { AppRouterClient } from "@acme/orpc";
-import { clientEnv } from "@acme/env/client";
-import { serverEnv } from "@acme/env/server";
 
-const getRequestHeaders = createServerFn({ method: "GET" }).handler(() => {
-  const request = getWebRequest();
-  const headers = new Headers(request.headers);
-
-  return Object.fromEntries(headers);
-});
-
-const headers = createIsomorphicFn()
-  .server(async () => {
-    const headers = await getRequestHeaders();
-    return {
-      ...headers,
-      "x-orpc-source": "tss-react-server",
-    };
-  })
-  .client(() => ({
-    "x-orpc-source": "tss-react-client",
-  }));
-
-const getServerUrl = createIsomorphicFn()
-  .server(() => {
-    return serverEnv.IS_DOCKER_HOST === "true"
-      ? "http://server:3000"
-      : "http://localhost:3000";
-  })
-  .client(() => {
-    return clientEnv.VITE_SERVER_URL;
-  });
+import { getServerUrl, headers } from "~/lib/server-helpers";
 
 const link = new RPCLink({
   url: getServerUrl() + "/rpc",

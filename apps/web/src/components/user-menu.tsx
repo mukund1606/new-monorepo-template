@@ -1,8 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 
-import { authClient } from "@acme/auth/client";
-
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
@@ -13,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { Skeleton } from "~/components/ui/skeleton";
+import { authClient } from "~/lib/auth-client";
 import { useORPC } from "~/orpc/context";
 
 export default function UserMenu() {
