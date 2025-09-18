@@ -21,7 +21,7 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "zod": "^4.1.8"
+    "zod": "^4.1.9"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",

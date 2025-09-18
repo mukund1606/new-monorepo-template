@@ -5,6 +5,10 @@ import { openAPI } from "better-auth/plugins";
 import { db } from "@acme/db/client";
 import { serverEnv } from "@acme/env/server";
 
+export type Plugins = [ReturnType<typeof openAPI>];
+
+const plugins: Plugins = [openAPI()];
+
 export const authConfig = {
   database: drizzleAdapter(db, {
     provider: "pg",
@@ -14,19 +18,10 @@ export const authConfig = {
   emailAndPassword: {
     enabled: true,
   },
-  plugins: [openAPI()],
+  plugins,
   advanced: {
     crossSubDomainCookies: {
       enabled: true,
     },
-    // cookies: {
-    //   sessionToken: {
-    //     attributes: {
-    //       sameSite: "None",
-    //       secure: true,
-    //       partitioned: true, // New browser standards will mandate this for foreign cookies
-    //     },
-    //   },
-    // },
   },
 } satisfies BetterAuthOptions;

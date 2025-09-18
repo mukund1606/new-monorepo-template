@@ -1,6 +1,7 @@
 {
   "name": "@acme/orpc",
   "private": true,
+  "type": "module",
   "imports": {
     "~/*": "./src/*"
   },
@@ -27,9 +28,9 @@
     "@acme/auth": "workspace:*",
     "@acme/db": "workspace:*",
     "@acme/shared": "workspace:*",
-    "@orpc/server": "^1.8.8",
-    "@orpc/zod": "^1.8.8",
-    "zod": "^4.1.8"
+    "@orpc/server": "^1.8.9",
+    "@orpc/zod": "^1.8.9",
+    "zod": "^4.1.9"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
