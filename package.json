@@ -11,6 +11,7 @@
     "build": "bun --env-file .env turbo run build",
     "clean": "git clean -xdf node_modules .cache .turbo",
     "clean:workspaces": "turbo run clean",
+    "commit": "cz",
     "db:generate": "bun --env-file .env turbo -F @acme/db db:generate",
     "db:migrate": "bun --env-file .env turbo -F @acme/db db:migrate",
     "db:push": "bun --env-file .env turbo -F @acme/db db:push",
@@ -24,15 +25,26 @@
     "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
     "lint:ws": "bunx sherif@latest",
     "postinstall-patch": "bun scripts/patch.sh",
+    "prepare": "husky",
     "start": "bun --env-file .env bun --filter '*' start",
     "start:server": "bun --env-file .env bun --filter @acme/server start",
     "start:web": "bun --env-file .env bun --filter @acme/web start",
     "typecheck": "turbo run typecheck",
     "update-deps": "bunx taze --interactive --recursive"
   },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
   "prettier": "@acme/prettier-config",
   "devDependencies": {
     "@acme/prettier-config": "workspace:*",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^9.1.7",
     "prettier": "^3.6.2",
     "turbo": "^2.5.6",
     "typescript": "^5.9.2"

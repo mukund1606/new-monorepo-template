@@ -7,7 +7,7 @@ import { useORPC } from "~/orpc/context";
 export const Route = createFileRoute("/")({
   component: HomeComponent,
   validateSearch: z.object({
-    test: z.string(),
+    test: z.string().optional(),
   }),
 });
 
