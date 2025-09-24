@@ -21,7 +21,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         <ReactQueryStreamedHydration>
           <ORPCContext value={orpc}>
             {children}
-            <Toaster richColors />
+            <Toaster richColors closeButton duration={2000} />
           </ORPCContext>
         </ReactQueryStreamedHydration>
         <ReactQueryDevtools />
