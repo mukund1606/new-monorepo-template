@@ -2,17 +2,10 @@
   "name": "@acme/env",
   "private": true,
   "type": "module",
-  "imports": {
-    "~/*": "./src/*"
-  },
   "exports": {
-    "./server": {
-      "types": "./dist/src/server.d.ts",
-      "default": "./src/server.ts"
-    },
-    "./client": {
-      "types": "./dist/src/client.d.ts",
-      "default": "./src/client.ts"
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
     }
   },
   "scripts": {
@@ -25,15 +18,15 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "@t3-oss/env-core": "^0.13.8",
+    "@t3-oss/env-nextjs": "^0.13.8",
     "dotenv": "^17.2.2",
-    "zod": "^4.1.9"
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "eslint": "^9.35.0",
+    "eslint": "^9.36.0",
     "prettier": "^3.6.2",
     "tsc-alias": "^1.8.16",
     "typescript": "^5.9.2"

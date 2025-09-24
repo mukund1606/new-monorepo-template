@@ -3,7 +3,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { openAPI } from "better-auth/plugins";
 
 import { db } from "@acme/db/client";
-import { serverEnv } from "@acme/env/server";
+import { env } from "@acme/env";
 
 export type Plugins = [ReturnType<typeof openAPI>];
 
@@ -13,8 +13,8 @@ export const authConfig = {
   database: drizzleAdapter(db, {
     provider: "pg",
   }),
-  baseURL: serverEnv.CORS_ORIGIN,
-  secret: serverEnv.AUTH_SECRET,
+  baseURL: env.NEXT_PUBLIC_BASE_URL,
+  secret: env.AUTH_SECRET,
   emailAndPassword: {
     enabled: true,
   },

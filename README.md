@@ -41,8 +41,7 @@ A full-stack application with server and web components using Bun, React, and Ho
 
 ## Services
 
-- **Server**: Hono API server running on port 3000
-- **Web**: React frontend running on port 3001
+- **Next.js**: React fullstack running on port 3000
 
 ## Development
 
@@ -59,10 +58,6 @@ For local development without Docker:
    ```bash
    # Start all services
    bun run dev
-
-   # Or start individually
-   bun run dev:server
-   bun run dev:web
    ```
 
 ## Environment Variables

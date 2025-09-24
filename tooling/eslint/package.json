@@ -4,7 +4,8 @@
   "type": "module",
   "exports": {
     "./base": "./base.js",
-    "./react": "./react.js"
+    "./react": "./react.js",
+    "./nextjs": "./nextjs.js"
   },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo node_modules",
@@ -13,13 +14,13 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "@eslint/compat": "^1.3.2",
-    "@eslint/css": "^0.11.0",
-    "@eslint/js": "^9.35.0",
+    "@eslint/compat": "^1.4.0",
+    "@eslint/css": "^0.11.1",
+    "@eslint/js": "^9.36.0",
     "@eslint/json": "^0.13.2",
-    "@tanstack/eslint-plugin-query": "^5.89.0",
-    "@tanstack/eslint-plugin-router": "^1.131.2",
-    "eslint": "^9.35.0",
+    "@next/eslint-plugin-next": "^15.5.4",
+    "@tanstack/eslint-plugin-query": "^5.90.1",
+    "eslint": "^9.36.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-drizzle": "^0.2.3",
     "eslint-plugin-import": "^2.32.0",
@@ -27,15 +28,15 @@
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^6.0.0",
-    "eslint-plugin-turbo": "^2.5.6",
+    "eslint-plugin-turbo": "^2.5.8",
     "globals": "^16.4.0",
-    "typescript-eslint": "^8.44.0"
+    "typescript-eslint": "^8.44.1"
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
     "@types/eslint-plugin-jsx-a11y": "^6.10.0",
-    "eslint": "^9.35.0",
+    "eslint": "^9.36.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.2"
   }

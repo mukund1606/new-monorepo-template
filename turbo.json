@@ -55,7 +55,13 @@
       "persistent": true
     }
   },
-  "globalEnv": ["DATABASE_URL", "AUTH_SECRET", "CORS_ORIGIN", "VITE_SERVER_URL", "PORT"],
+  "globalEnv": [
+    "DATABASE_URL",
+    "AUTH_SECRET",
+    "CORS_ORIGIN",
+    "NEXT_PUBLIC_BASE_URL",
+    "PORT"
+  ],
   "globalPassThroughEnv": [
     "NODE_ENV",
     "CI",

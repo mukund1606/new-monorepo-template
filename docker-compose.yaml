@@ -1,76 +1,24 @@
 services:
-  # Option 1: Separate containers (recommended for production)
-  # server:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.server
-  #   container_name: my-monorepo-server
-  #   ports:
-  #     - "3000:3000"
-  #   environment:
-  #     - NODE_ENV=production
-  #     - DATABASE_URL=${DATABASE_URL}
-  #     - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3001}
-  #     - AUTH_SECRET=${AUTH_SECRET:-your-secret-key}
-  #     - VITE_SERVER_URL=${VITE_SERVER_URL:-http://localhost:3000}
-  #   restart: unless-stopped
-  #   networks:
-  #     - app-network
-
-  # web:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.web
-  #   container_name: my-monorepo-web
-  #   ports:
-  #     - "3001:3001"
-  #   environment:
-  #     - NODE_ENV=production
-  #     - IS_DOCKER_HOST=true
-  #     - PORT=3001
-  #     - DATABASE_URL=${DATABASE_URL}
-  #     - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3001}
-  #     - AUTH_SECRET=${AUTH_SECRET:-your-secret-key}
-  #     - VITE_SERVER_URL=${VITE_SERVER_URL:-http://localhost:3000}
-  #     - VITE_BASE_URL=${VITE_BASE_URL:-/}
-  #   depends_on:
-  #     - server
-  #   restart: unless-stopped
-  #   networks:
-  #     - app-network
-
-  # Option 2: Single mono container (alternative - uncomment to use)
-  mono:
+  app:
     build:
       context: .
-      dockerfile: Dockerfile.mono
+      dockerfile: Dockerfile
       args:
-        - VITE_SERVER_URL=${VITE_SERVER_URL:-http://localhost:3000}
-        - VITE_BASE_URL=${VITE_BASE_URL:-/}
-        - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3001}
+        - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL:-http://localhost:3000}
         - DATABASE_URL=${DATABASE_URL}
         - AUTH_SECRET=${AUTH_SECRET:-your-secret-key}
     container_name: my-monorepo-mono
     ports:
       - "3000:3000"
-      - "3001:3001"
     environment:
       - NODE_ENV=production
-      - VITE_SERVER_URL=${VITE_SERVER_URL:-http://localhost:3000}
-      - VITE_BASE_URL=${VITE_BASE_URL:-/}
-      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3001}
+      - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL:-http://localhost:3000}
       - DATABASE_URL=${DATABASE_URL}
       - AUTH_SECRET=${AUTH_SECRET:-your-secret-key}
     restart: unless-stopped
-    networks:
-      - app-network
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
       interval: 1m30s
       timeout: 30s
       retries: 5
       start_period: 30s
-
-networks:
-  app-network:
-    driver: bridge

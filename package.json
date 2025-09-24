@@ -17,7 +17,6 @@
     "db:push": "bun --env-file .env turbo -F @acme/db db:push",
     "db:studio": "bun --env-file .env turbo -F @acme/db db:studio",
     "dev": "bun --env-file .env turbo watch dev --continue",
-    "dev:web": "turbo watch dev -F @acme/web...",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
     "postinstall": "bun lint:ws && bun postinstall-patch",
@@ -26,9 +25,7 @@
     "lint:ws": "bunx sherif@latest",
     "postinstall-patch": "bun scripts/patch.sh",
     "prepare": "husky",
-    "start": "bun --env-file .env bun --filter '*' start",
-    "start:server": "bun --env-file .env bun --filter @acme/server start",
-    "start:web": "bun --env-file .env bun --filter @acme/web start",
+    "start": "bun --env-file .env turbo run start",
     "typecheck": "turbo run typecheck",
     "update-deps": "bunx taze --interactive --recursive"
   },
@@ -46,7 +43,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.1.7",
     "prettier": "^3.6.2",
-    "turbo": "^2.5.6",
+    "turbo": "^2.5.8",
     "typescript": "^5.9.2"
   },
   "packageManager": "bun@1.2.22",

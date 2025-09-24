@@ -2,17 +2,14 @@
   "name": "@acme/orpc",
   "private": true,
   "type": "module",
-  "imports": {
-    "~/*": "./src/*"
-  },
   "exports": {
     ".": {
       "types": "./dist/src/index.d.ts",
-      "default": "./src/index.ts"
+      "default": "./dist/src/index.js"
     },
     "./lib/context": {
       "types": "./dist/src/lib/context.d.ts",
-      "default": "./src/lib/context.ts"
+      "default": "./dist/src/lib/context.js"
     }
   },
   "scripts": {
@@ -28,15 +25,15 @@
     "@acme/auth": "workspace:*",
     "@acme/db": "workspace:*",
     "@acme/shared": "workspace:*",
-    "@orpc/server": "^1.8.9",
-    "@orpc/zod": "^1.8.9",
-    "zod": "^4.1.9"
+    "@orpc/server": "^1.9.0",
+    "@orpc/zod": "^1.9.0",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "eslint": "^9.35.0",
+    "eslint": "^9.36.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.2"
   }

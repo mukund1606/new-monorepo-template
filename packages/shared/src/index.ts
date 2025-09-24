@@ -6,3 +6,5 @@ export const unused = z.string().describe(
    with back and frontend, you can put them in here
   `,
 );
+
+export const shared = z.string().describe("This is a shared schema");

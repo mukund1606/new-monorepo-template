@@ -62,17 +62,7 @@ export const drizzleEslintConfig = defineConfig(
 
 export default defineConfig([
   includeIgnoreFile(path.join(import.meta.dirname, "../../.gitignore")),
-  globalIgnores([
-    ".vinxi",
-    "build",
-    "dist",
-    "node_modules",
-    ".output",
-    ".nitro",
-    ".tanstack",
-    ".turbo",
-    ".astro",
-  ]),
+  globalIgnores([".next", "build", "dist", "node_modules", ".turbo"]),
   eslint.configs.recommended,
   tseslint.configs.strict,
   tseslint.configs.strictTypeChecked,
