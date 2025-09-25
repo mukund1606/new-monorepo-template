@@ -28,9 +28,14 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
   beforeLoad: async ({ context }) => {
     const { orpc, queryClient } = context;
     const user = await queryClient.fetchQuery(orpc.auth.getSession.queryOptions());
-    return {
-      currentSession: user,
-    };
+    if (user?.session) {
+      return {
+        currentSession: {
+          session: user.session,
+          user: user.user,
+        },
+      };
+    }
   },
   head: () => ({
     meta: [

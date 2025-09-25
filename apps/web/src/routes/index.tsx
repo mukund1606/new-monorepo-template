@@ -1,14 +1,10 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { z } from "zod";
 
 import { useORPC } from "~/orpc/context";
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
-  validateSearch: z.object({
-    test: z.string().optional(),
-  }),
 });
 
 const TITLE_TEXT = `
@@ -28,11 +24,9 @@ const TITLE_TEXT = `
  `;
 
 function HomeComponent() {
-  // OK THis is a comment
+  // OK This is a comment
   const orpc = useORPC();
   const healthCheck = useSuspenseQuery(orpc.healthCheck.queryOptions());
-  const { test } = Route.useSearch();
-  console.log("🚀 ~ HomeComponent ~ test:", test);
 
   return (
     <div className="container mx-auto max-w-3xl px-4 py-2">

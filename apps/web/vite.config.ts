@@ -1,6 +1,7 @@
 import path from "path";
 import tailwindcss from "@tailwindcss/vite";
 import { devtools } from "@tanstack/devtools-vite";
+import { nitroV2Plugin } from "@tanstack/nitro-v2-vite-plugin";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import { defineConfig, loadEnv } from "vite";
@@ -16,17 +17,19 @@ export default defineConfig(async ({ mode }) => {
   };
 
   const { clientEnv } = await import("@acme/env/client");
+  await import("@acme/env/server");
 
   return {
+    server: {
+      port: 3001,
+    },
     base: clientEnv.VITE_BASE_URL,
     plugins: [
       devtools(),
       viteTsConfigPaths(),
       tailwindcss(),
-      tanstackStart({
-        customViteReactPlugin: true,
-        target: "bun",
-      }),
+      tanstackStart(),
+      nitroV2Plugin(),
       viteReact(),
     ],
   };

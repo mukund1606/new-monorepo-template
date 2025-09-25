@@ -13,7 +13,7 @@ import { getQueryClient } from "~/orpc/query-client";
 import { getServerUrl } from "./lib/server-helpers";
 import { routeTree } from "./routeTree.gen";
 
-export const createRouter = () => {
+export const getRouter = () => {
   const queryClient = getQueryClient();
   const orpc = getORPCUtils(getServerUrl());
 
@@ -54,6 +54,6 @@ export const createRouter = () => {
 declare module "@tanstack/react-router" {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Register {
-    router: ReturnType<typeof createRouter>;
+    router: ReturnType<typeof getRouter>;
   }
 }
