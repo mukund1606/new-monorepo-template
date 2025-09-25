@@ -25,6 +25,7 @@
     "@acme/auth": "workspace:*",
     "@acme/db": "workspace:*",
     "@acme/shared": "workspace:*",
+    "@orpc/client": "^1.9.0",
     "@orpc/server": "^1.9.0",
     "@orpc/zod": "^1.9.0",
     "zod": "^4.1.11"

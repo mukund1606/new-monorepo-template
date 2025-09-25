@@ -1,9 +1,9 @@
-import { createORPCClient } from "@orpc/client";
+import { createORPCClient, createSafeClient } from "@orpc/client";
 import { RPCLink } from "@orpc/client/fetch";
 import { BatchLinkPlugin } from "@orpc/client/plugins";
 import { createTanstackQueryUtils } from "@orpc/tanstack-query";
 
-import type { AppRouterClient } from "@acme/orpc";
+import type { AppRouterClient, SafeAppRouterClient } from "@acme/orpc";
 
 import { getBaseUrl, getHeaders } from "~/lib/helpers";
 
@@ -24,6 +24,7 @@ export function createORPC() {
   });
 
   const client: AppRouterClient = createORPCClient(link);
+  const safeClient: SafeAppRouterClient = createSafeClient(client);
 
-  return createTanstackQueryUtils(client);
+  return createTanstackQueryUtils(safeClient);
 }

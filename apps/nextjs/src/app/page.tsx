@@ -23,7 +23,7 @@ const TITLE_TEXT = `
 export default function Page() {
   // OK THis is a comment
   const orpc = useORPC();
-  const healthCheck = useSuspenseQuery(orpc.healthCheck.queryOptions());
+  const { data: healthCheck } = useSuspenseQuery(orpc.healthCheck.queryOptions());
 
   return (
     <div className="container mx-auto max-w-3xl px-4 py-2">

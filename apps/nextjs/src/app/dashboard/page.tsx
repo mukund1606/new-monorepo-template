@@ -14,13 +14,17 @@ export default async function Page() {
     redirect("/login");
   }
 
-  const privateData = await api.privateData();
+  const { error, data: privateData } = await api.privateData();
+
+  if (error) {
+    console.error(error.message);
+  }
 
   return (
     <div>
       <h1>Dashboard</h1>
       <p>Welcome {currentSession.user.name}</p>
-      <p>privateData: {privateData.message}</p>
+      <p>privateData: {privateData?.message}</p>
     </div>
   );
 }

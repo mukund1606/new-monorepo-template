@@ -1,4 +1,5 @@
-import type { RouterClient } from "@orpc/server";
+import type { SafeClient } from "@orpc/client";
+import type { InferRouterInputs, InferRouterOutputs, RouterClient } from "@orpc/server";
 import { createRouterClient } from "@orpc/server";
 import { RPCHandler } from "@orpc/server/fetch";
 import { BatchHandlerPlugin } from "@orpc/server/plugins";
@@ -22,6 +23,10 @@ export const appRouter = {
 
 export type AppRouter = typeof appRouter;
 export type AppRouterClient = RouterClient<AppRouter>;
+export type SafeAppRouterClient = SafeClient<AppRouterClient>;
+
+export type RouterOutputs = InferRouterOutputs<AppRouter>;
+export type RouterInputs = InferRouterInputs<AppRouter>;
 
 export const createServerHandler = () => {
   return new RPCHandler(appRouter, {
