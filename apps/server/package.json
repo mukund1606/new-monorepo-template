@@ -2,9 +2,6 @@
   "name": "@acme/server",
   "private": true,
   "type": "module",
-  "imports": {
-    "~/*": "./src/*"
-  },
   "scripts": {
     "build": "bun build src/index.ts --outdir ./dist --target bun --minify",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
@@ -21,10 +18,10 @@
     "@acme/env": "workspace:*",
     "@acme/orpc": "workspace:*",
     "@acme/shared": "workspace:*",
-    "@orpc/openapi": "^1.9.0",
-    "@orpc/server": "^1.9.0",
-    "@orpc/zod": "^1.9.0",
-    "hono": "^4.9.8",
+    "@orpc/openapi": "^1.9.1",
+    "@orpc/server": "^1.9.1",
+    "@orpc/zod": "^1.9.1",
+    "hono": "^4.9.9",
     "zod": "^4.1.11"
   },
   "devDependencies": {

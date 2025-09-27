@@ -2,21 +2,18 @@
   "name": "@acme/db",
   "private": true,
   "type": "module",
-  "imports": {
-    "~/*": "./src/*"
-  },
   "exports": {
     ".": {
       "types": "./dist/src/index.d.ts",
-      "default": "./src/index.ts"
+      "default": "./dist/src/index.js"
     },
     "./client": {
       "types": "./dist/src/client.d.ts",
-      "default": "./src/client.ts"
+      "default": "./dist/src/client.js"
     },
     "./schema": {
       "types": "./dist/src/schema.d.ts",
-      "default": "./src/schema.ts"
+      "default": "./dist/src/schema.js"
     }
   },
   "scripts": {
@@ -43,7 +40,7 @@
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
     "@types/bun": "^1.2.22",
-    "drizzle-kit": "^0.31.4",
+    "drizzle-kit": "^0.31.5",
     "eslint": "^9.36.0",
     "prettier": "^3.6.2",
     "tsc-alias": "^1.8.16",

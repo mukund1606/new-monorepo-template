@@ -2,13 +2,14 @@
   "name": "@acme/shared",
   "private": true,
   "type": "module",
-  "imports": {
-    "~/*": "./src/*"
-  },
   "exports": {
     ".": {
       "types": "./dist/src/index.d.ts",
-      "default": "./src/index.ts"
+      "default": "./dist/src/index.js"
+    },
+    "./*": {
+      "types": "./dist/src/*.d.ts",
+      "default": "./dist/src/*.js"
     }
   },
   "scripts": {

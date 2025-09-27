@@ -12,6 +12,18 @@ export const serverEnv = createEnv({
       process.env.NODE_ENV === "production"
         ? z.string().min(1)
         : z.string().min(1).optional(),
+    ASSET_PRELOAD_MAX_SIZE: z.number().default(5 * 1024 * 1024),
+    ASSET_PRELOAD_INCLUDE_PATTERNS: z.string().default(""),
+    ASSET_PRELOAD_EXCLUDE_PATTERNS: z.string().default(""),
+    ASSET_PRELOAD_VERBOSE_LOGGING: z.string().default("true"),
+    ASSET_PRELOAD_ENABLE_ETAG: z.string().default("true"),
+    ASSET_PRELOAD_ENABLE_GZIP: z.string().default("true"),
+    ASSET_PRELOAD_GZIP_MIN_SIZE: z.number().default(1024),
+    ASSET_PRELOAD_GZIP_MIME_TYPES: z
+      .string()
+      .default(
+        "text/,application/javascript,application/json,application/xml,image/svg+xml",
+      ),
   },
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,
