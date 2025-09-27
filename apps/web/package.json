@@ -3,10 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "tsc --noEmit && vite build",
     "clean": "git clean -xdf .cache .output .turbo node_modules .nitro .tanstack dist",
     "dev": "vite dev --port=3001",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "format": "prettier --check . --ignore-path ../../.prettierignore --ignore-path ../../.gitignore",
     "lint": "eslint",
     "start": "PORT=3001 bun run server.ts",
     "typecheck": "tsc --noEmit"
