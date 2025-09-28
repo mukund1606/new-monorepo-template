@@ -20,7 +20,7 @@ COPY . .
 RUN bun install
 
 # Build all applications
-RUN bunx turbo run build
+RUN bun run build:production
 
 # Expose ports for both services
 EXPOSE 3000
@@ -29,4 +29,4 @@ EXPOSE 3000
 ENV NODE_ENV=production
 
 # Start both services
-CMD ["bun", "run", "start"]
+CMD ["bun", "run", "start:production"]
