@@ -8,7 +8,7 @@
     "dev": "vite dev",
     "format": "prettier --check . --ignore-path ../../.prettierignore --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "start": "bun run server.ts",
+    "start": "bun run .output/server/index.mjs",
     "typecheck": "tsc --noEmit"
   },
   "prettier": "@acme/prettier-config",
@@ -34,6 +34,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.544.0",
     "next-themes": "^0.4.6",
+    "nitro": "npm:nitro-nightly@latest",
     "radix-ui": "^1.4.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

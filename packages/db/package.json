@@ -29,7 +29,7 @@
     "@t3-oss/env-core": "^0.13.8",
     "drizzle-orm": "^0.44.5",
     "drizzle-zod": "^0.8.3",
-    "pg": "^8.16.3",
+    "postgres": "^3.4.7",
     "zod": "^4.1.11"
   },
   "devDependencies": {
@@ -37,7 +37,6 @@
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
     "@types/node": "^24.5.2",
-    "@types/pg": "^8.15.5",
     "drizzle-kit": "^0.31.5",
     "eslint": "^9.36.0",
     "prettier": "^3.6.2",
