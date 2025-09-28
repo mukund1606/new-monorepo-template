@@ -8,7 +8,8 @@
     "tooling/*"
   ],
   "scripts": {
-    "build": "bun --env-file .env turbo run build",
+    "build:local": "bun --env-file .env turbo run build",
+    "build:production": "bun turbo run build",
     "clean": "git clean -xdf node_modules .cache .turbo",
     "clean:workspaces": "turbo run clean",
     "commit": "cz",
@@ -26,7 +27,8 @@
     "lint:ws": "bunx sherif@latest",
     "postinstall-patch": "bun scripts/patch.sh",
     "prepare": "husky",
-    "start": "bun --env-file .env turbo run start",
+    "start:local": "bun --env-file .env turbo run start",
+    "start:production": "bun turbo run start",
     "typecheck": "turbo run typecheck",
     "update-deps": "bunx taze --interactive --recursive"
   },
