@@ -55,14 +55,13 @@
       "persistent": true
     }
   },
-  "globalEnv": ["DATABASE_URL", "AUTH_SECRET", "CORS_ORIGIN", "VITE_SERVER_URL", "PORT"],
+  "globalEnv": ["DATABASE_URL", "BETTER_AUTH_URL", "BETTER_AUTH_SECRET", "PORT"],
   "globalPassThroughEnv": [
     "NODE_ENV",
     "CI",
     "VERCEL",
     "VERCEL_ENV",
     "VERCEL_URL",
-    "npm_lifecycle_event",
-    "IS_DOCKER_HOST"
+    "npm_lifecycle_event"
   ]
 }

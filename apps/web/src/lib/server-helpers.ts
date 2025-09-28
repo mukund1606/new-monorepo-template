@@ -1,37 +1,14 @@
-import { createIsomorphicFn, createServerFn } from "@tanstack/react-start";
-import { getRequest } from "@tanstack/react-start/server";
-
-import { clientEnv } from "@acme/env/client";
-
-// import { serverEnv } from "@acme/env/server";
-
-const getRequestHeaders = createServerFn({ method: "GET" }).handler(() => {
-  const request = getRequest();
-  const headers = new Headers(request.headers);
-
-  return Object.fromEntries(headers);
-});
+import { createIsomorphicFn } from "@tanstack/react-start";
+import { getRequestHeaders } from "@tanstack/react-start/server";
 
 export const headers = createIsomorphicFn()
-  .server(async () => {
-    const headers = await getRequestHeaders();
-    return {
-      ...headers,
-      "x-orpc-source": "tss-react-server",
-    };
+  .server(() => {
+    const headers = getRequestHeaders();
+    headers.set("x-orpc-source", "tss-react-server");
+    return headers;
   })
-  .client(() => ({
-    "x-orpc-source": "tss-react-client",
-  }));
-
-export const getServerUrl = () => {
-  let URL = clientEnv.VITE_SERVER_URL;
-  if (typeof window !== "undefined") {
-    URL = clientEnv.VITE_SERVER_URL;
-    console.log("Client URL", URL);
-    return URL;
-  }
-  URL = "http://localhost:3000";
-  console.log("Server URL", URL);
-  return URL;
-};
+  .client(() => {
+    const headers = new Headers();
+    headers.set("x-orpc-source", "tss-react-client");
+    return headers;
+  });

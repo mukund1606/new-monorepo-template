@@ -8,14 +8,12 @@ import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query
 import DefaultLoading from "~/components/default-loading";
 import NotFound from "~/components/not-found";
 import { ORPCContext } from "~/orpc/context";
-import { getORPCUtils } from "~/orpc/orpc";
+import { orpc } from "~/orpc/orpc";
 import { getQueryClient } from "~/orpc/query-client";
-import { getServerUrl } from "./lib/server-helpers";
 import { routeTree } from "./routeTree.gen";
 
 export const getRouter = () => {
   const queryClient = getQueryClient();
-  const orpc = getORPCUtils(getServerUrl());
 
   const router = createTanStackRouter({
     routeTree,

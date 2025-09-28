@@ -1,26 +1,46 @@
-import { createORPCClient } from "@orpc/client";
+import type { RouterUtils } from "@orpc/tanstack-query";
+import { createORPCClient, createSafeClient } from "@orpc/client";
 import { RPCLink } from "@orpc/client/fetch";
+import { BatchLinkPlugin } from "@orpc/client/plugins";
+import { createRouterClient } from "@orpc/server";
 import { createTanstackQueryUtils } from "@orpc/tanstack-query";
+import { createIsomorphicFn } from "@tanstack/react-start";
 
-import type { AppRouterClient } from "@acme/orpc";
+import type { AppRouterClient, SafeAppRouterClient } from "@acme/orpc";
+import { appRouter } from "@acme/orpc";
 
 import { headers } from "~/lib/server-helpers";
 
-export const getORPCUtils = (baseURL: string) => {
-  const link = new RPCLink({
-    url: baseURL + "/rpc",
-    fetch(url, options) {
-      return fetch(url, {
-        ...options,
-        credentials: "include",
-      });
-    },
-    headers: headers,
+const getORPCClient = createIsomorphicFn()
+  .server((): AppRouterClient => {
+    return createRouterClient(appRouter, {
+      context: () => ({
+        reqHeaders: headers(),
+        resHeaders: new Headers(),
+      }),
+    });
+  })
+  .client((): AppRouterClient => {
+    const link = new RPCLink({
+      url: `${window.location.origin}/api/rpc`,
+      headers: headers(),
+      plugins: [
+        new BatchLinkPlugin({
+          groups: [
+            {
+              condition: () => true,
+              context: {},
+            },
+          ],
+        }),
+      ],
+    });
+    return createORPCClient<AppRouterClient>(link);
   });
 
-  const orpcClient: AppRouterClient = createORPCClient(link);
+export const client: AppRouterClient = getORPCClient();
+export const safeClient: SafeAppRouterClient = createSafeClient(client);
 
-  return createTanstackQueryUtils(orpcClient);
-};
+export const orpc = createTanstackQueryUtils(client);
 
-export type ORPCTanstackQueryUtils = ReturnType<typeof getORPCUtils>;
+export type ORPCReactUtils = RouterUtils<AppRouterClient>;

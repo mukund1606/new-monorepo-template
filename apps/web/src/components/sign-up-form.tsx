@@ -1,5 +1,6 @@
 import { useForm } from "@tanstack/react-form";
-import { useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate, useRouter } from "@tanstack/react-router";
 import { toast } from "sonner";
 import z from "zod";
 
@@ -7,12 +8,16 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { authClient } from "~/lib/auth-client";
+import { useORPC } from "~/orpc/context";
 
 export default function SignUpForm({
   onSwitchToSignIn,
 }: {
   onSwitchToSignIn: () => void;
 }) {
+  const orpc = useORPC();
+  const queryClient = useQueryClient();
+  const router = useRouter();
   const navigate = useNavigate({
     from: "/",
   });
@@ -31,8 +36,12 @@ export default function SignUpForm({
           name: value.name,
         },
         {
-          onSuccess: () => {
-            void navigate({
+          onSuccess: async () => {
+            await queryClient.invalidateQueries({
+              queryKey: orpc.auth.key(),
+            });
+            await router.invalidate();
+            await navigate({
               to: "/dashboard",
             });
             toast.success("Sign up successful");

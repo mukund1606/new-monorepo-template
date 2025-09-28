@@ -1,9 +1,6 @@
-import type { RouterUtils } from "@orpc/tanstack-query";
 import { createContext, useContext } from "react";
 
-import type { AppRouterClient } from "@acme/orpc";
-
-type ORPCReactUtils = RouterUtils<AppRouterClient>;
+import type { ORPCReactUtils } from "./orpc";
 
 export const ORPCContext = createContext<ORPCReactUtils | undefined>(undefined);
 

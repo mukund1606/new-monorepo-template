@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Link, useNavigate, useRouter } from "@tanstack/react-router";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -17,6 +17,8 @@ import { useORPC } from "~/orpc/context";
 export default function UserMenu() {
   const navigate = useNavigate();
   const orpc = useORPC();
+  const router = useRouter();
+  const queryClient = useQueryClient();
   const { data: session, isPending } = useQuery(orpc.auth.getSession.queryOptions());
 
   if (isPending) {
@@ -45,6 +47,10 @@ export default function UserMenu() {
             variant="destructive"
             className="w-full"
             onClick={() => {
+              void queryClient.invalidateQueries({
+                queryKey: orpc.auth.key(),
+              });
+              void router.invalidate();
               void authClient.signOut({
                 fetchOptions: {
                   onSuccess: () => {

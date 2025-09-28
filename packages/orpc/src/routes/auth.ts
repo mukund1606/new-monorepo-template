@@ -1,4 +1,4 @@
-import { publicProcedure } from "~/lib/procedures";
+import { publicProcedure } from "~/procedures";
 
 export const authRouter = {
   getSession: publicProcedure

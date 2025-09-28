@@ -12,14 +12,14 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import type { Session } from "@acme/auth";
 
-import type { ORPCTanstackQueryUtils } from "~/orpc/orpc";
+import type { ORPCReactUtils } from "~/orpc/orpc";
 import Loader from "~/components/default-loading";
 import Header from "~/components/header";
 import { Toaster } from "~/components/ui/sonner";
 import appCss from "../index.css?url";
 
 export type RouterAppContext = {
-  orpc: ORPCTanstackQueryUtils;
+  orpc: ORPCReactUtils;
   queryClient: QueryClient;
   currentSession: Session | null;
 };
@@ -27,6 +27,7 @@ export type RouterAppContext = {
 export const Route = createRootRouteWithContext<RouterAppContext>()({
   beforeLoad: async ({ context }) => {
     const { orpc, queryClient } = context;
+
     const user = await queryClient.fetchQuery(orpc.auth.getSession.queryOptions());
     if (user?.session) {
       return {
@@ -73,7 +74,7 @@ function RootDocument() {
           <Header />
           {isFetching ? <Loader /> : <Outlet />}
         </div>
-        <Toaster richColors />
+        <Toaster richColors closeButton duration={2000} />
         <TanStackDevtools
           config={{ defaultOpen: false, theme: "dark" }}
           plugins={[

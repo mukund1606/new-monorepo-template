@@ -3,7 +3,7 @@
   "compilerOptions": {
     "lib": ["ES2024", "DOM", "DOM.Iterable"],
     "jsx": "preserve",
-    "types": ["vite/client"],
+    "types": ["vite/client", "bun"],
     "paths": {
       "~/*": ["./src/*"]
     }

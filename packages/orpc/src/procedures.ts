@@ -5,6 +5,7 @@ import type {
 import { onError, ORPCError, os, ValidationError } from "@orpc/server";
 import z from "zod";
 
+import type { Session } from "@acme/auth";
 import { auth } from "@acme/auth";
 import { db } from "@acme/db/client";
 
@@ -47,10 +48,12 @@ const base = os
 export const publicProcedure = base
   // .use(timingMiddleware)
   .use(async ({ next, context }) => {
-    const session =
-      (await auth.api.getSession({
-        headers: context.reqHeaders ?? new Headers(),
-      })) ?? undefined;
+    const session = (await auth.api.getSession({
+      headers: context.reqHeaders ?? new Headers(),
+      query: {
+        disableCookieCache: true,
+      },
+    })) as Session | null;
 
     const result = await next({
       context: {

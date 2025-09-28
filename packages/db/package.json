@@ -7,13 +7,9 @@
       "types": "./dist/src/index.d.ts",
       "default": "./dist/src/index.js"
     },
-    "./client": {
-      "types": "./dist/src/client.d.ts",
-      "default": "./dist/src/client.js"
-    },
-    "./schema": {
-      "types": "./dist/src/schema.d.ts",
-      "default": "./dist/src/schema.js"
+    "./*": {
+      "types": "./dist/src/*.d.ts",
+      "default": "./dist/src/*.js"
     }
   },
   "scripts": {
@@ -30,16 +26,17 @@
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
-    "@acme/env": "workspace:*",
+    "@t3-oss/env-core": "^0.13.8",
     "drizzle-orm": "^0.44.5",
     "drizzle-zod": "^0.8.3",
+    "pg": "^8.16.3",
     "zod": "^4.1.11"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/bun": "^1.2.22",
+    "@types/pg": "^8.15.5",
     "drizzle-kit": "^0.31.5",
     "eslint": "^9.36.0",
     "prettier": "^3.6.2",

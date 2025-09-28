@@ -1,76 +1,24 @@
 services:
-  # Option 1: Separate containers (recommended for production)
-  # server:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.server
-  #   container_name: my-monorepo-server
-  #   ports:
-  #     - "3000:3000"
-  #   environment:
-  #     - NODE_ENV=production
-  #     - DATABASE_URL=${DATABASE_URL}
-  #     - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3001}
-  #     - AUTH_SECRET=${AUTH_SECRET:-your-secret-key}
-  #     - VITE_SERVER_URL=${VITE_SERVER_URL:-http://localhost:3000}
-  #   restart: unless-stopped
-  #   networks:
-  #     - app-network
-
-  # web:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.web
-  #   container_name: my-monorepo-web
-  #   ports:
-  #     - "3001:3001"
-  #   environment:
-  #     - NODE_ENV=production
-  #     - IS_DOCKER_HOST=true
-  #     - PORT=3001
-  #     - DATABASE_URL=${DATABASE_URL}
-  #     - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3001}
-  #     - AUTH_SECRET=${AUTH_SECRET:-your-secret-key}
-  #     - VITE_SERVER_URL=${VITE_SERVER_URL:-http://localhost:3000}
-  #     - VITE_BASE_URL=${VITE_BASE_URL:-/}
-  #   depends_on:
-  #     - server
-  #   restart: unless-stopped
-  #   networks:
-  #     - app-network
-
-  # Option 2: Single mono container (alternative - uncomment to use)
-  mono:
+  my-monorepo:
     build:
       context: .
-      dockerfile: Dockerfile.mono
+      dockerfile: Dockerfile
       args:
-        - VITE_SERVER_URL=${VITE_SERVER_URL:-http://localhost:3000}
-        - VITE_BASE_URL=${VITE_BASE_URL:-/}
-        - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3001}
-        - DATABASE_URL=${DATABASE_URL}
-        - AUTH_SECRET=${AUTH_SECRET:-your-secret-key}
-    container_name: my-monorepo-mono
+        - BETTER_AUTH_URL=${BETTER_AUTH_URL:-http://localhost:3000}
+        - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@localhost:5432/postgres}
+        - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET:-your-secret-key}
+    container_name: my-monorepo
     ports:
       - "3000:3000"
-      - "3001:3001"
     environment:
       - NODE_ENV=production
-      - VITE_SERVER_URL=${VITE_SERVER_URL:-http://localhost:3000}
-      - VITE_BASE_URL=${VITE_BASE_URL:-/}
-      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3001}
-      - DATABASE_URL=${DATABASE_URL}
-      - AUTH_SECRET=${AUTH_SECRET:-your-secret-key}
+      - BETTER_AUTH_URL=${BETTER_AUTH_URL:-http://localhost:3000}
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@localhost:5432/postgres}
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET:-your-secret-key}
     restart: unless-stopped
-    networks:
-      - app-network
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
-      interval: 1m30s
-      timeout: 30s
+      interval: 10s
+      timeout: 10s
       retries: 5
-      start_period: 30s
-
-networks:
-  app-network:
-    driver: bridge
+      start_period: 5s

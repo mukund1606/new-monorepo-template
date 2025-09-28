@@ -26,9 +26,7 @@
     "lint:ws": "bunx sherif@latest",
     "postinstall-patch": "bun scripts/patch.sh",
     "prepare": "husky",
-    "start": "bun --env-file .env --filter '*' start",
-    "start:server": "bun --env-file .env --filter @acme/server start",
-    "start:web": "bun --env-file .env --filter @acme/web start",
+    "start": "bun --env-file .env turbo run start",
     "typecheck": "turbo run typecheck",
     "update-deps": "bunx taze --interactive --recursive"
   },

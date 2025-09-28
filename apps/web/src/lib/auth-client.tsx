@@ -1,5 +1,5 @@
 import { getAuthClient } from "@acme/auth/client";
 
-import { getServerUrl } from "./server-helpers";
+import { getBaseUrl } from "./helpers";
 
-export const authClient = getAuthClient(getServerUrl());
+export const authClient = getAuthClient(getBaseUrl());
