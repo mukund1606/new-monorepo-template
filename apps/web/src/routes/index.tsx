@@ -1,49 +1,58 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 import { useORPC } from "~/orpc/context";
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
 });
 
-const TITLE_TEXT = `
- ██████╗ ███████╗████████╗████████╗███████╗██████╗
- ██╔══██╗██╔════╝╚══██╔══╝╚══██╔══╝██╔════╝██╔══██╗
- ██████╔╝█████╗     ██║      ██║   █████╗  ██████╔╝
- ██╔══██╗██╔══╝     ██║      ██║   ██╔══╝  ██╔══██╗
- ██████╔╝███████╗   ██║      ██║   ███████╗██║  ██║
- ╚═════╝ ╚══════╝   ╚═╝      ╚═╝   ╚══════╝╚═╝  ╚═╝
-
- ████████╗    ███████╗████████╗ █████╗  ██████╗██╗  ██╗
- ╚══██╔══╝    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝
-    ██║       ███████╗   ██║   ███████║██║     █████╔╝
-    ██║       ╚════██║   ██║   ██╔══██║██║     ██╔═██╗
-    ██║       ███████║   ██║   ██║  ██║╚██████╗██║  ██╗
-    ╚═╝       ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
- `;
+const channel = "test";
 
 function HomeComponent() {
-  // OK This is a comment
   const orpc = useORPC();
-  const healthCheck = useSuspenseQuery(orpc.healthCheck.queryOptions());
+  const [message, setMessage] = useState("");
+  const messages = useQuery(
+    orpc.chat.onMessage.experimental_liveOptions({
+      input: { channel },
+      refetchOnMount: true,
+      enabled: true,
+    }),
+  );
+  const sendMessage = useMutation(orpc.chat.sendMessage.mutationOptions());
 
   return (
     <div className="container mx-auto max-w-3xl px-4 py-2">
-      <pre className="overflow-x-auto font-mono text-sm">{TITLE_TEXT}</pre>
-      <div className="grid gap-6">
-        <section className="rounded-lg border p-4">
-          <h2 className="mb-2 font-medium">API Status</h2>
-          <div className="flex items-center gap-2">
-            <div
-              className={`h-2 w-2 rounded-full ${healthCheck.data ? "bg-green-500" : "bg-red-500"}`}
-            />
-            <span className="text-muted-foreground text-sm">
-              {healthCheck.data ? "Connected" : "Disconnected"}
-            </span>
-          </div>
-        </section>
-      </div>
+      <section className="space-y-4 rounded-lg border p-4">
+        <h2 className="mb-2 font-medium">Server Sent Events</h2>
+        <div className="flex items-center gap-2">
+          <Input
+            type="text"
+            placeholder="Message"
+            value={message}
+            onChange={(e) => {
+              setMessage(e.target.value);
+            }}
+          />
+          <Button
+            onClick={() => {
+              sendMessage.mutate({ channel, message });
+            }}
+          >
+            Send
+          </Button>
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          {messages.data?.map((message) => (
+            <div className="w-full rounded-md border p-2 text-sm" key={message}>
+              {message}
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
