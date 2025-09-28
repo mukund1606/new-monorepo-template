@@ -19,7 +19,7 @@
   "explorer.fileNesting.patterns": {
     "tsconfig.json": "tsconfig.*.json, env.d.ts",
     "app.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
-    "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .prettier*, prettier*, .editorconfig, .gitattributes, bun.lock"
+    "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .prettier*, prettier*, .editorconfig, .gitattributes, bun.lock, .czrc, .nvmrc, commitlint.config.js, .commitlintrc.json, postcss.config.js, turbo.json"
   },
 
   // always choose typescript from node_modules
@@ -46,7 +46,7 @@
   "eslint.workingDirectories": [
     { "pattern": "apps/*/" },
     { "pattern": "packages/*/" },
-    { "pattern": "configs/*/" }
+    { "pattern": "tooling/*/" }
   ],
   "prettier.ignorePath": ".gitignore",
   "tailwindCSS.classFunctions": ["cva", "cx", "cn"],

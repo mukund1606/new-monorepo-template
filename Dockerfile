@@ -1,3 +1,4 @@
+# check=skip=SecretsUsedInArgOrEnv
 # Single container for both web and server
 FROM oven/bun:1.2.22
 
