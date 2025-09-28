@@ -22,9 +22,6 @@ RUN bun install
 # Build all applications
 RUN bun run build:production
 
-# Expose ports for both services
-EXPOSE 3000
-
 # Set environment
 ENV NODE_ENV=production
 

@@ -8,8 +8,6 @@ services:
         - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@localhost:5432/postgres}
         - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET:-your-secret-key}
     container_name: my-monorepo
-    ports:
-      - "3000:3000"
     environment:
       - NODE_ENV=production
       - BETTER_AUTH_URL=${BETTER_AUTH_URL:-http://localhost:3000}
