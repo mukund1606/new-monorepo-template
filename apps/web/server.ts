@@ -407,7 +407,10 @@ async function startServer() {
     port: PORT,
     routes: {
       ...routes,
-      "/*": (req: Request) => handler.fetch(req),
+      "/*": (req: Request) => {
+        console.log(`${req.method} -> ${req.url}`);
+        return handler.fetch(req);
+      },
     },
     error(error) {
       console.error("Uncaught server error:", error);
