@@ -1,4 +1,3 @@
-import fs from "fs/promises";
 import type { SafeClient } from "@orpc/client";
 import type { InferRouterInputs, InferRouterOutputs, RouterClient } from "@orpc/server";
 import { EventPublisher } from "@orpc/client";
@@ -13,52 +12,29 @@ import z from "zod";
 import { protectedProcedure, publicProcedure } from "~/procedures";
 import { authRouter } from "~/routes/auth";
 
-type Messages = Array<string>;
-
-type FileData = Record<string, Messages>;
-
-const getFileData = async () => {
-  const path = "messages.json";
-
-  try {
-    await fs.access(path);
-  } catch {
-    await fs.writeFile(path, JSON.stringify({}, null, 2));
-  }
-
-  const fileContent = await fs.readFile(path, "utf-8");
-  const data = JSON.parse(fileContent) as FileData;
-  return data;
+type EventData = {
+  message: string;
 };
 
-const setFileData = async (data: FileData) => {
-  const path = "messages.json";
-  await fs.writeFile(path, JSON.stringify(data, null, 2));
-};
-
-const publisher = new EventPublisher<Record<string, undefined>>();
+const publisher = new EventPublisher<Record<string, EventData>>();
 
 const chat = {
   onMessage: publicProcedure
     .input(z.object({ channel: z.string() }))
     .handler(async function* ({ input, signal }) {
-      for await (const _ of publisher.subscribe(input.channel, { signal })) {
-        console.log("Subscribed to channel:", input.channel);
-        const data = await getFileData();
-        yield data[input.channel];
+      console.log("Subscribed to channel:", input.channel);
+      for await (const payload of publisher.subscribe(input.channel, { signal })) {
+        yield payload.message;
       }
       console.log("Subscription ended for channel:", input.channel);
     }),
   sendMessage: publicProcedure
     .input(z.object({ channel: z.string(), message: z.string() }))
-    .handler(async ({ input }) => {
+    .handler(({ input }) => {
       console.log("Sending message:", input.message, "to channel:", input.channel);
-      const data = await getFileData();
-      data[input.channel] ??= [];
-      data[input.channel] = [...(data[input.channel] ?? []), input.message];
-      await setFileData(data);
-      publisher.publish(input.channel, undefined);
-      console.log("Published message, current messages:", data[input.channel]);
+      publisher.publish(input.channel, {
+        message: input.message,
+      });
     }),
 };
 

@@ -16,7 +16,7 @@ function HomeComponent() {
   const orpc = useORPC();
   const [message, setMessage] = useState("");
   const messages = useQuery(
-    orpc.chat.onMessage.experimental_liveOptions({
+    orpc.chat.onMessage.experimental_streamedOptions({
       input: { channel },
       refetchOnMount: true,
       enabled: true,
