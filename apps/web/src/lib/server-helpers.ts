@@ -1,9 +1,13 @@
 import { createIsomorphicFn } from "@tanstack/react-start";
-import { getRequestHeaders } from "@tanstack/react-start/server";
+import { getHeaders } from "@tanstack/react-start/server";
 
 export const headers = createIsomorphicFn()
   .server(() => {
-    const headers = getRequestHeaders();
+    const h = getHeaders();
+    const headers = new Headers();
+    for (const [key, value] of Object.entries(h)) {
+      headers.set(key, value ?? "");
+    }
     headers.set("x-orpc-source", "tss-react-server");
     return headers;
   })

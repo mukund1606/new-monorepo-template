@@ -8,14 +8,18 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createServerRootRoute } from '@tanstack/react-start/server'
+
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TestRouteImport } from './routes/test'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiHealthRouteImport } from './routes/api/health'
-import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc.$'
-import { Route as ApiAuthSplatRouteImport } from './routes/api/auth.$'
+import { ServerRoute as ApiHealthServerRouteImport } from './routes/api/health'
+import { ServerRoute as ApiRpcSplatServerRouteImport } from './routes/api/rpc.$'
+import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth.$'
+
+const rootServerRouteImport = createServerRootRoute()
 
 const TestRoute = TestRouteImport.update({
   id: '/test',
@@ -37,20 +41,20 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiHealthRoute = ApiHealthRouteImport.update({
+const ApiHealthServerRoute = ApiHealthServerRouteImport.update({
   id: '/api/health',
   path: '/api/health',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => rootServerRouteImport,
 } as any)
-const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
+const ApiRpcSplatServerRoute = ApiRpcSplatServerRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => rootServerRouteImport,
 } as any)
-const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => rootServerRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -58,18 +62,12 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/test': typeof TestRoute
-  '/api/health': typeof ApiHealthRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/test': typeof TestRoute
-  '/api/health': typeof ApiHealthRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,38 +75,13 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/test': typeof TestRoute
-  '/api/health': typeof ApiHealthRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/dashboard'
-    | '/login'
-    | '/test'
-    | '/api/health'
-    | '/api/auth/$'
-    | '/api/rpc/$'
+  fullPaths: '/' | '/dashboard' | '/login' | '/test'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/dashboard'
-    | '/login'
-    | '/test'
-    | '/api/health'
-    | '/api/auth/$'
-    | '/api/rpc/$'
-  id:
-    | '__root__'
-    | '/'
-    | '/dashboard'
-    | '/login'
-    | '/test'
-    | '/api/health'
-    | '/api/auth/$'
-    | '/api/rpc/$'
+  to: '/' | '/dashboard' | '/login' | '/test'
+  id: '__root__' | '/' | '/dashboard' | '/login' | '/test'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -116,9 +89,35 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   LoginRoute: typeof LoginRoute
   TestRoute: typeof TestRoute
-  ApiHealthRoute: typeof ApiHealthRoute
-  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
-  ApiRpcSplatRoute: typeof ApiRpcSplatRoute
+}
+export interface FileServerRoutesByFullPath {
+  '/api/health': typeof ApiHealthServerRoute
+  '/api/auth/$': typeof ApiAuthSplatServerRoute
+  '/api/rpc/$': typeof ApiRpcSplatServerRoute
+}
+export interface FileServerRoutesByTo {
+  '/api/health': typeof ApiHealthServerRoute
+  '/api/auth/$': typeof ApiAuthSplatServerRoute
+  '/api/rpc/$': typeof ApiRpcSplatServerRoute
+}
+export interface FileServerRoutesById {
+  __root__: typeof rootServerRouteImport
+  '/api/health': typeof ApiHealthServerRoute
+  '/api/auth/$': typeof ApiAuthSplatServerRoute
+  '/api/rpc/$': typeof ApiRpcSplatServerRoute
+}
+export interface FileServerRouteTypes {
+  fileServerRoutesByFullPath: FileServerRoutesByFullPath
+  fullPaths: '/api/health' | '/api/auth/$' | '/api/rpc/$'
+  fileServerRoutesByTo: FileServerRoutesByTo
+  to: '/api/health' | '/api/auth/$' | '/api/rpc/$'
+  id: '__root__' | '/api/health' | '/api/auth/$' | '/api/rpc/$'
+  fileServerRoutesById: FileServerRoutesById
+}
+export interface RootServerRouteChildren {
+  ApiHealthServerRoute: typeof ApiHealthServerRoute
+  ApiAuthSplatServerRoute: typeof ApiAuthSplatServerRoute
+  ApiRpcSplatServerRoute: typeof ApiRpcSplatServerRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -151,26 +150,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+  }
+}
+declare module '@tanstack/react-start/server' {
+  interface ServerFileRoutesByPath {
     '/api/health': {
       id: '/api/health'
       path: '/api/health'
       fullPath: '/api/health'
-      preLoaderRoute: typeof ApiHealthRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof ApiHealthServerRouteImport
+      parentRoute: typeof rootServerRouteImport
     }
     '/api/rpc/$': {
       id: '/api/rpc/$'
       path: '/api/rpc/$'
       fullPath: '/api/rpc/$'
-      preLoaderRoute: typeof ApiRpcSplatRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof ApiRpcSplatServerRouteImport
+      parentRoute: typeof rootServerRouteImport
     }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
       fullPath: '/api/auth/$'
-      preLoaderRoute: typeof ApiAuthSplatRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof ApiAuthSplatServerRouteImport
+      parentRoute: typeof rootServerRouteImport
     }
   }
 }
@@ -180,19 +183,15 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
   TestRoute: TestRoute,
-  ApiHealthRoute: ApiHealthRoute,
-  ApiAuthSplatRoute: ApiAuthSplatRoute,
-  ApiRpcSplatRoute: ApiRpcSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
+const rootServerRouteChildren: RootServerRouteChildren = {
+  ApiHealthServerRoute: ApiHealthServerRoute,
+  ApiAuthSplatServerRoute: ApiAuthSplatServerRoute,
+  ApiRpcSplatServerRoute: ApiRpcSplatServerRoute,
 }
+export const serverRouteTree = rootServerRouteImport
+  ._addFileChildren(rootServerRouteChildren)
+  ._addFileTypes<FileServerRouteTypes>()

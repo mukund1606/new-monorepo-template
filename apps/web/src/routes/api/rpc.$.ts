@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createServerFileRoute } from "@tanstack/react-start/server";
 
 import { createServerHandler } from "@acme/orpc";
 
@@ -16,15 +16,11 @@ async function handleRequest({ request }: { request: Request }) {
   return response ?? new Response("Not Found", { status: 404 });
 }
 
-export const Route = createFileRoute("/api/rpc/$")({
-  server: {
-    handlers: {
-      GET: handleRequest,
-      POST: handleRequest,
-      PUT: handleRequest,
-      PATCH: handleRequest,
-      DELETE: handleRequest,
-      HEAD: handleRequest,
-    },
-  },
+export const ServerRoute = createServerFileRoute("/api/rpc/$").methods({
+  GET: handleRequest,
+  POST: handleRequest,
+  PUT: handleRequest,
+  PATCH: handleRequest,
+  DELETE: handleRequest,
+  HEAD: handleRequest,
 });
