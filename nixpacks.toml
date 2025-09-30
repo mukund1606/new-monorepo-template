@@ -1,13 +1,13 @@
 [phases.setup]
-nixPkgs = ['nodejs_22', 'bun']
-nixpkgsArchive = 'f69ae4816bc1b501460ad2c0c63ed0cc4a9b876e'
+nixPkgs = ["nodejs_22", "bun", "pnpm"]
+nixpkgsArchive = "master"
 
 [phases.install]
-dependsOn = ['setup']
-commands = ["bun install"]
+dependsOn = ["setup"]
+commands = ["pnpm install"]
 
 [phases.build]
-commands = ["bun run build:production"]
+commands = ["bun run build"]
 
 [start]
-cmd = "bun run start:production"
+cmd = "bun run start"

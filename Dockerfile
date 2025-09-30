@@ -20,10 +20,10 @@ COPY . .
 RUN bun install
 
 # Build all applications
-RUN bun run build:production
+RUN bun run build
 
 # Set environment
 ENV NODE_ENV=production
 
 # Start both services
-CMD ["bun", "run", "start:production"]
+CMD ["bun", "run", "start"]

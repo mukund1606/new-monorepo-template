@@ -2,9 +2,9 @@
 import path from "path";
 import tailwindcss from "@tailwindcss/vite";
 import { devtools } from "@tanstack/devtools-vite";
+import { nitroV2Plugin } from "@tanstack/nitro-v2-vite-plugin";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
-import { nitro } from "nitro/vite";
 import { defineConfig, loadEnv } from "vite";
 import viteTsConfigPaths from "vite-tsconfig-paths";
 
@@ -15,17 +15,17 @@ export default defineConfig(async ({ mode }) => {
     ...loadEnv(mode, path.resolve(process.cwd(), "../../"), ""),
   };
 
-  const { env } = await import("./src/env");
+  await import("./src/env");
 
-  const nitroPlugin = () => {
-    if (env.NODE_ENV === "production") {
-      return nitro({
-        config: {
-          preset: "bun",
-        },
-      });
-    }
-  };
+  // const nitroPlugin = () => {
+  //   if (env.NODE_ENV === "production") {
+  //     return nitro({
+  //       config: {
+  //         preset: "bun",
+  //       },
+  //     });
+  //   }
+  // };
 
   return {
     server: {
@@ -37,7 +37,9 @@ export default defineConfig(async ({ mode }) => {
       tanstackStart(),
       viteReact(),
       devtools(),
-      nitroPlugin(),
+      nitroV2Plugin({
+        preset: "bun",
+      }),
     ],
   };
 });

@@ -22,11 +22,17 @@ const chat = {
   onMessage: publicProcedure
     .input(z.object({ channel: z.string() }))
     .handler(async function* ({ input, signal }) {
-      console.log("Subscribed to channel:", input.channel);
-      for await (const payload of publisher.subscribe(input.channel, { signal })) {
-        yield payload.message;
+      try {
+        console.log("Subscribed to channel:", input.channel);
+        for await (const payload of publisher.subscribe(input.channel, { signal })) {
+          yield payload.message;
+        }
+        signal?.addEventListener("abort", () => {
+          console.log("Signal aborted");
+        });
+      } finally {
+        console.log("Subscription ended for channel:", input.channel);
       }
-      console.log("Subscription ended for channel:", input.channel);
     }),
   sendMessage: publicProcedure
     .input(z.object({ channel: z.string(), message: z.string() }))

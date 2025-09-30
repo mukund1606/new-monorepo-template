@@ -8,17 +8,17 @@
     "tooling/*"
   ],
   "scripts": {
-    "build:local": "bun --env-file .env turbo run build",
-    "build:production": "bun turbo run build",
+    "build": "bun --env-file .env turbo run build",
     "clean": "git clean -xdf node_modules .cache .turbo",
     "clean:workspaces": "turbo run clean",
     "commit": "cz",
+    "compile": "turbo compile",
     "db:generate": "bun --env-file .env turbo -F @acme/db db:generate",
     "db:migrate": "bun --env-file .env turbo -F @acme/db db:migrate",
     "db:push": "bun --env-file .env turbo -F @acme/db db:push",
     "db:studio": "bun --env-file .env turbo -F @acme/db db:studio",
+    "predev": "bun --env-file .env turbo run compile",
     "dev": "bun --env-file .env turbo watch dev compile",
-    "dev:web": "turbo watch dev -F @acme/web...",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
     "postinstall": "bun lint:ws && bun postinstall-patch",
@@ -27,8 +27,7 @@
     "lint:ws": "bunx sherif@latest",
     "postinstall-patch": "bun scripts/patch.sh",
     "prepare": "husky",
-    "start:local": "bun --env-file .env turbo run start",
-    "start:production": "bun turbo run start",
+    "start": "bun --env-file .env turbo run start",
     "typecheck": "turbo run typecheck",
     "update-deps": "bunx taze --interactive --recursive"
   },
@@ -51,7 +50,7 @@
     "turbo": "^2.5.8",
     "typescript": "^5.9.2"
   },
-  "packageManager": "bun@1.2.23",
+  "packageManager": "pnpm@10.17.1",
   "engines": {
     "node": ">=22.19.0"
   }
