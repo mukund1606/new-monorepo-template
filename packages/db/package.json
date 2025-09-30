@@ -4,22 +4,21 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/src/index.d.ts",
-      "default": "./dist/src/index.js"
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     },
     "./*": {
-      "types": "./dist/src/*.d.ts",
-      "default": "./dist/src/*.js"
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
     }
   },
   "scripts": {
-    "build": "tsc && tsc-alias",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "compile": "tsup && tsc-alias",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "dev": "tsc && tsc-alias",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
@@ -36,11 +35,10 @@
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/node": "^24.5.2",
+    "@types/node": "^24.6.0",
     "drizzle-kit": "^0.31.5",
     "eslint": "^9.36.0",
     "prettier": "^3.6.2",
-    "tsc-alias": "^1.8.16",
     "typescript": "^5.9.2"
   }
 }

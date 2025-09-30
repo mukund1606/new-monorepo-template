@@ -15,24 +15,29 @@ export default defineConfig(async ({ mode }) => {
     ...loadEnv(mode, path.resolve(process.cwd(), "../../"), ""),
   };
 
-  await import("./src/env");
+  const { env } = await import("./src/env");
+
+  const nitroPlugin = () => {
+    if (env.NODE_ENV === "production") {
+      return nitro({
+        config: {
+          preset: "bun",
+        },
+      });
+    }
+  };
 
   return {
     server: {
       port: 3000,
     },
     plugins: [
-      devtools(),
       viteTsConfigPaths(),
       tailwindcss(),
       tanstackStart(),
       viteReact(),
-      nitro({
-        config: {
-          ignore: ["bun_server.ts"],
-          preset: "bun",
-        },
-      }),
+      devtools(),
+      nitroPlugin(),
     ],
   };
 });

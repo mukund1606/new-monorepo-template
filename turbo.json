@@ -6,14 +6,18 @@
       "dependsOn": ["^topo"]
     },
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^compile"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".cache/tsbuildinfo.json", "dist/**"]
+      "outputs": [".output/**", "dist/**"]
+    },
+    "compile": {
+      "dependsOn": ["^compile"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**"]
     },
     "dev": {
-      "dependsOn": ["^dev"],
-      "cache": false,
-      "persistent": false
+      "persistent": true,
+      "cache": false
     },
     "format": {
       "outputs": [".cache/.prettiercache"],

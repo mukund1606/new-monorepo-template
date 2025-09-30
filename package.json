@@ -17,7 +17,7 @@
     "db:migrate": "bun --env-file .env turbo -F @acme/db db:migrate",
     "db:push": "bun --env-file .env turbo -F @acme/db db:push",
     "db:studio": "bun --env-file .env turbo -F @acme/db db:studio",
-    "dev": "bun --env-file .env turbo watch dev --continue",
+    "dev": "bun --env-file .env turbo watch dev compile",
     "dev:web": "turbo watch dev -F @acme/web...",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
@@ -46,10 +46,12 @@
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.1.7",
     "prettier": "^3.6.2",
+    "tsc-alias": "^1.8.16",
+    "tsup": "^8.5.0",
     "turbo": "^2.5.8",
     "typescript": "^5.9.2"
   },
-  "packageManager": "bun@1.2.22",
+  "packageManager": "bun@1.2.23",
   "engines": {
     "node": ">=22.19.0"
   }

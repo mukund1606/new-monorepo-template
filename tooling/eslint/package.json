@@ -18,7 +18,7 @@
     "@eslint/js": "^9.36.0",
     "@eslint/json": "^0.13.2",
     "@tanstack/eslint-plugin-query": "^5.91.0",
-    "@tanstack/eslint-plugin-router": "^1.132.0",
+    "@tanstack/eslint-plugin-router": "^1.132.21",
     "eslint": "^9.36.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-drizzle": "^0.2.3",
@@ -29,13 +29,13 @@
     "eslint-plugin-react-hooks": "^6.0.0",
     "eslint-plugin-turbo": "^2.5.8",
     "globals": "^16.4.0",
-    "typescript-eslint": "^8.44.1"
+    "typescript-eslint": "^8.45.0"
   },
   "devDependencies": {
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
     "@types/eslint-plugin-jsx-a11y": "^6.10.0",
-    "@types/node": "^24.5.2",
+    "@types/node": "^24.6.0",
     "eslint": "^9.36.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.2"
