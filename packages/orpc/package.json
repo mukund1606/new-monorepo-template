@@ -4,17 +4,17 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
     },
     "./lib/context": {
-      "types": "./dist/lib/context.d.ts",
-      "default": "./dist/lib/context.js"
+      "types": "./dist/src/lib/context.d.ts",
+      "default": "./dist/src/lib/context.js"
     }
   },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "compile": "tsup && tsc-alias",
+    "compile": "tsc && tsc-alias",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
@@ -22,8 +22,10 @@
   "prettier": "@acme/prettier-config",
   "dependencies": {
     "@acme/auth": "workspace:*",
+    "@acme/business-logic": "workspace:*",
     "@acme/db": "workspace:*",
     "@acme/shared": "workspace:*",
+    "@evyweb/ioctopus": "^1.3.0",
     "@orpc/client": "^1.9.2",
     "@orpc/server": "^1.9.2",
     "@orpc/zod": "^1.9.2",

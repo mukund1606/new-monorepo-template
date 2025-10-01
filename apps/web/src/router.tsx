@@ -10,6 +10,7 @@ import NotFound from "~/components/not-found";
 import { ORPCContext } from "~/orpc/context";
 import { orpc } from "~/orpc/orpc";
 import { getQueryClient } from "~/orpc/query-client";
+
 import { routeTree } from "./routeTree.gen";
 
 export const getRouter = () => {
@@ -50,7 +51,6 @@ export const getRouter = () => {
 };
 
 declare module "@tanstack/react-router" {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Register {
     router: ReturnType<typeof getRouter>;
   }

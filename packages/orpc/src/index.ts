@@ -1,48 +1,16 @@
 import type { SafeClient } from "@orpc/client";
 import type { InferRouterInputs, InferRouterOutputs, RouterClient } from "@orpc/server";
-import { EventPublisher } from "@orpc/client";
 import { RPCHandler } from "@orpc/server/fetch";
 import {
   BatchHandlerPlugin,
   RequestHeadersPlugin,
   ResponseHeadersPlugin,
 } from "@orpc/server/plugins";
-import z from "zod";
 
 import { protectedProcedure, publicProcedure } from "~/procedures";
-import { authRouter } from "~/routes/auth";
 
-type EventData = {
-  message: string;
-};
-
-const publisher = new EventPublisher<Record<string, EventData>>();
-
-const chat = {
-  onMessage: publicProcedure
-    .input(z.object({ channel: z.string() }))
-    .handler(async function* ({ input, signal }) {
-      try {
-        console.log("Subscribed to channel:", input.channel);
-        for await (const payload of publisher.subscribe(input.channel, { signal })) {
-          yield payload.message;
-        }
-        signal?.addEventListener("abort", () => {
-          console.log("Signal aborted");
-        });
-      } finally {
-        console.log("Subscription ended for channel:", input.channel);
-      }
-    }),
-  sendMessage: publicProcedure
-    .input(z.object({ channel: z.string(), message: z.string() }))
-    .handler(({ input }) => {
-      console.log("Sending message:", input.message, "to channel:", input.channel);
-      publisher.publish(input.channel, {
-        message: input.message,
-      });
-    }),
-};
+import { authRouter } from "./routes/auth";
+import { todoRouter } from "./routes/todos";
 
 export const appRouter = {
   healthCheck: publicProcedure
@@ -56,11 +24,11 @@ export const appRouter = {
   privateData: protectedProcedure.handler(({ context }) => {
     return {
       message: "This is private",
-      user: context.session.user,
+      user: context.session,
     };
   }),
   auth: authRouter,
-  chat,
+  todo: todoRouter,
 };
 
 export type AppRouter = typeof appRouter;

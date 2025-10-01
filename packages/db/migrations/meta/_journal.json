@@ -15,6 +15,34 @@
       "when": 1757638123456,
       "tag": "0001_sleepy_betty_brant",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1759260287416,
+      "tag": "0002_shiny_darkstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1759260444671,
+      "tag": "0003_third_gamora",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1759298545493,
+      "tag": "0004_certain_killraven",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1759298913682,
+      "tag": "0005_panoramic_gladiator",
+      "breakpoints": true
     }
   ]
 }

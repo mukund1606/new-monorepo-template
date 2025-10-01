@@ -5,11 +5,12 @@ import type {
 import { onError, ORPCError, os, ValidationError } from "@orpc/server";
 import z from "zod";
 
-import type { Session } from "@acme/auth";
-import { auth } from "@acme/auth";
-import { db } from "@acme/db/client";
+import { getInjection } from "~/di/container";
 
-type ORPCContext = ResponseHeadersPluginContext & RequestHeadersPluginContext;
+type ORPCContext = ResponseHeadersPluginContext &
+  RequestHeadersPluginContext & {
+    request: Request;
+  };
 
 const base = os
   .$context<ORPCContext>()
@@ -45,25 +46,21 @@ const base = os
     }),
   );
 
-export const publicProcedure = base
-  // .use(timingMiddleware)
-  .use(async ({ next, context }) => {
-    const session = (await auth.api.getSession({
-      headers: context.reqHeaders ?? new Headers(),
-      query: {
-        disableCookieCache: true,
-      },
-    })) as Session | null;
+export const publicProcedure = base.use(async ({ next, context }) => {
+  const authService = getInjection("IAuthenticationService");
 
-    const result = await next({
-      context: {
-        session,
-        db,
-      },
-    });
-
-    return result;
+  const session = await authService.getSession({
+    request: context.request,
   });
+
+  const result = await next({
+    context: {
+      session,
+    },
+  });
+
+  return result;
+});
 
 export const protectedProcedure = publicProcedure.use(async ({ context, next }) => {
   const session = context.session;

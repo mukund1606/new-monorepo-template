@@ -90,7 +90,7 @@ export default defineConfig([
       "@typescript-eslint/array-type": ["warn", { default: "generic" }],
       // "id-length": ["warn", { min: 2, exceptions: ["_"] }],
       "@typescript-eslint/no-non-null-assertion": "off",
-      "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+      "@typescript-eslint/consistent-type-definitions": "off",
       "@typescript-eslint/consistent-type-imports": [
         "warn",
         {
@@ -105,7 +105,9 @@ export default defineConfig([
           varsIgnorePattern: "^_",
         },
       ],
-      "@typescript-eslint/require-await": "error",
+      "@typescript-eslint/require-await": "off",
+      "@typescript-eslint/restrict-template-expressions": "off",
+      "@typescript-eslint/only-throw-error": "off",
       "@typescript-eslint/no-misused-promises": [
         2,
         { checksVoidReturn: { attributes: false } },

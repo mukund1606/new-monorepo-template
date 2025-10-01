@@ -16,6 +16,7 @@ import type { ORPCReactUtils } from "~/orpc/orpc";
 import Loader from "~/components/default-loading";
 import Header from "~/components/header";
 import { Toaster } from "~/components/ui/sonner";
+
 import appCss from "../index.css?url";
 
 export type RouterAppContext = {
@@ -30,11 +31,12 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 
     const user = await queryClient.fetchQuery(orpc.auth.getSession.queryOptions());
     if (user?.session) {
+      const currentSession = {
+        session: user.session,
+        user: user.user,
+      } as Session;
       return {
-        currentSession: {
-          session: user.session,
-          user: user.user,
-        },
+        currentSession,
       };
     }
   },

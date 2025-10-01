@@ -34,6 +34,7 @@ async function handleRequest({ request }: { request: Request }) {
     context: {
       reqHeaders: request.headers,
       resHeaders: new Headers(),
+      request: request,
     },
   });
 
