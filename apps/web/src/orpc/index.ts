@@ -21,7 +21,7 @@ const getORPCClient = createIsomorphicFn()
           credentials: "include",
         });
       },
-      headers: headers(),
+      headers: () => headers(),
       plugins: [
         new BatchLinkPlugin({
           groups: [
@@ -45,7 +45,7 @@ const getORPCClient = createIsomorphicFn()
           credentials: "include",
         });
       },
-      headers: headers(),
+      headers: () => headers(),
       plugins: [
         new BatchLinkPlugin({
           groups: [
