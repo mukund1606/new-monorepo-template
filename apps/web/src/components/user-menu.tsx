@@ -5,8 +5,10 @@ import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPositioner,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
@@ -34,36 +36,40 @@ export default function UserMenu() {
       <DropdownMenuTrigger
         render={<Button variant="outline">{session.user.name}</Button>}
       />
-      <DropdownMenuContent className="bg-card">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>{session.user.email}</DropdownMenuItem>
-        <DropdownMenuItem
-          render={
-            <Button
-              variant="destructive"
-              className="w-full"
-              onClick={() => {
-                void queryClient.invalidateQueries({
-                  queryKey: orpc.auth.key(),
-                });
-                void router.invalidate();
-                void authClient.signOut({
-                  fetchOptions: {
-                    onSuccess: () => {
-                      void navigate({
-                        to: "/",
-                      });
-                    },
-                  },
-                });
-              }}
-            >
-              Sign Out
-            </Button>
-          }
-        />
-      </DropdownMenuContent>
+      <DropdownMenuPositioner align="end">
+        <DropdownMenuContent className="bg-card">
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>{session.user.email}</DropdownMenuItem>
+            <DropdownMenuItem
+              render={
+                <Button
+                  variant="destructive"
+                  className="w-full"
+                  onClick={() => {
+                    void queryClient.invalidateQueries({
+                      queryKey: orpc.auth.key(),
+                    });
+                    void router.invalidate();
+                    void authClient.signOut({
+                      fetchOptions: {
+                        onSuccess: () => {
+                          void navigate({
+                            to: "/",
+                          });
+                        },
+                      },
+                    });
+                  }}
+                >
+                  Sign Out
+                </Button>
+              }
+            />
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenuPositioner>
     </DropdownMenu>
   );
 }
