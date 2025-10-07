@@ -31,36 +31,38 @@ export default function UserMenu() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">{session.user.name}</Button>
-      </DropdownMenuTrigger>
+      <DropdownMenuTrigger
+        render={<Button variant="outline">{session.user.name}</Button>}
+      />
       <DropdownMenuContent className="bg-card">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>{session.user.email}</DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Button
-            variant="destructive"
-            className="w-full"
-            onClick={() => {
-              void queryClient.invalidateQueries({
-                queryKey: orpc.auth.key(),
-              });
-              void router.invalidate();
-              void authClient.signOut({
-                fetchOptions: {
-                  onSuccess: () => {
-                    void navigate({
-                      to: "/",
-                    });
+        <DropdownMenuItem
+          render={
+            <Button
+              variant="destructive"
+              className="w-full"
+              onClick={() => {
+                void queryClient.invalidateQueries({
+                  queryKey: orpc.auth.key(),
+                });
+                void router.invalidate();
+                void authClient.signOut({
+                  fetchOptions: {
+                    onSuccess: () => {
+                      void navigate({
+                        to: "/",
+                      });
+                    },
                   },
-                },
-              });
-            }}
-          >
-            Sign Out
-          </Button>
-        </DropdownMenuItem>
+                });
+              }}
+            >
+              Sign Out
+            </Button>
+          }
+        />
       </DropdownMenuContent>
     </DropdownMenu>
   );
