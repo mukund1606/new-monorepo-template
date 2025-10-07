@@ -48,14 +48,14 @@ export default function UserMenu() {
                   variant="destructive"
                   className="w-full"
                   onClick={() => {
-                    void queryClient.invalidateQueries({
-                      queryKey: orpc.auth.key(),
-                    });
-                    void router.invalidate();
                     void authClient.signOut({
                       fetchOptions: {
-                        onSuccess: () => {
-                          void navigate({
+                        onSuccess: async () => {
+                          await queryClient.invalidateQueries({
+                            queryKey: orpc.auth.key(),
+                          });
+                          await router.invalidate();
+                          await navigate({
                             to: "/",
                           });
                         },
