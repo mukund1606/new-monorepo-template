@@ -5,14 +5,21 @@ services:
       dockerfile: Dockerfile
       args:
         - BETTER_AUTH_URL=${BETTER_AUTH_URL:-http://localhost:3000}
-        - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@localhost:5432/postgres}
+        - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:password@localhost:54321/postgres}
         - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET:-your-secret-key}
+        - VITE_SERVER_URL=${VITE_SERVER_URL:-http://localhost:3000}
+        - CLIENT_URL=${CLIENT_URL:-http://localhost:3001}
     container_name: my-monorepo
+    ports:
+      - 3000:3000
+      - 3001:3001
     environment:
       - NODE_ENV=production
       - BETTER_AUTH_URL=${BETTER_AUTH_URL:-http://localhost:3000}
-      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@localhost:5432/postgres}
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:password@localhost:54321/postgres}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET:-your-secret-key}
+      - VITE_SERVER_URL=${VITE_SERVER_URL:-http://localhost:3000}
+      - CLIENT_URL=${CLIENT_URL:-http://localhost:3001}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]

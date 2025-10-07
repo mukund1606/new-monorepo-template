@@ -1,37 +1,35 @@
 {
-  "name": "@acme/business-logic",
-  "version": "0.1.0",
+  "name": "@acme/server",
   "private": true,
   "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/src/index.d.ts",
-      "default": "./dist/src/index.js"
-    },
-    "./*": {
-      "types": "./dist/src/*.d.ts",
-      "default": "./dist/src/*.js"
-    }
-  },
   "scripts": {
+    "build": "bun build src/index.ts --outdir ./dist --target bun --minify",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "compile": "tsc && tsc-alias",
-    "compile:go": "tsgo && tsc-alias",
+    "dev": "bun run --hot src/index.ts",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
+    "start": "bun dist/index.js",
     "typecheck": "tsc --noEmit",
     "typecheck:go": "tsgo --noEmit"
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
+    "@acme/auth": "workspace:*",
+    "@acme/db": "workspace:*",
+    "@acme/orpc": "workspace:*",
     "@acme/shared": "workspace:*",
+    "@orpc/openapi": "^1.9.3",
+    "@orpc/server": "^1.9.3",
+    "@orpc/zod": "^1.9.3",
+    "@t3-oss/env-core": "^0.13.8",
+    "hono": "^4.9.10",
     "zod": "^4.1.12"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
     "@acme/prettier-config": "workspace:*",
     "@acme/tsconfig": "workspace:*",
-    "@types/node": "^24.7.0",
+    "@types/bun": "^1.2.23",
     "eslint": "^9.37.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3"

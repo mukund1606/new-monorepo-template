@@ -1,6 +1,6 @@
 import type { BetterAuthOptions } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { reactStartCookies } from "better-auth/react-start";
+import { openAPI } from "better-auth/plugins";
 
 import { db } from "@acme/db/client";
 
@@ -13,8 +13,14 @@ export const authConfig = {
   }),
   baseURL: env.BETTER_AUTH_URL,
   secret: env.BETTER_AUTH_SECRET,
+  trustedOrigins: [env.CLIENT_URL],
   emailAndPassword: {
     enabled: true,
   },
-  plugins: [reactStartCookies()],
+  plugins: [openAPI()],
+  advanced: {
+    crossSubDomainCookies: {
+      enabled: true,
+    },
+  },
 } satisfies BetterAuthOptions;

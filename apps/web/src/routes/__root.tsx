@@ -12,7 +12,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import type { Session } from "@acme/auth";
 
-import type { ORPCReactUtils } from "~/orpc/orpc";
+import type { ORPCReactUtils } from "~/orpc";
 import Loader from "~/components/default-loading";
 import Header from "~/components/header";
 import { Toaster } from "~/components/ui/sonner";
@@ -26,20 +26,20 @@ export type RouterAppContext = {
 };
 
 export const Route = createRootRouteWithContext<RouterAppContext>()({
-  beforeLoad: async ({ context }) => {
-    const { orpc, queryClient } = context;
+  // beforeLoad: async ({ context }) => {
+  //   const { orpc, queryClient } = context;
 
-    const user = await queryClient.fetchQuery(orpc.auth.getSession.queryOptions());
-    if (user?.session) {
-      const currentSession = {
-        session: user.session,
-        user: user.user,
-      } as Session;
-      return {
-        currentSession,
-      };
-    }
-  },
+  //   const user = await queryClient.fetchQuery(orpc.auth.getSession.queryOptions());
+  //   if (user?.session) {
+  //     const currentSession = {
+  //       session: user.session,
+  //       user: user.user,
+  //     } as Session;
+  //     return {
+  //       currentSession,
+  //     };
+  //   }
+  // },
   head: () => ({
     meta: [
       {

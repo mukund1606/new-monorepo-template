@@ -1,5 +1,5 @@
 import { getAuthClient } from "@acme/auth/client";
 
-import { getBaseUrl } from "./helpers";
+import { env } from "~/env";
 
-export const authClient = getAuthClient(getBaseUrl());
+export const authClient = getAuthClient(env.VITE_SERVER_URL);

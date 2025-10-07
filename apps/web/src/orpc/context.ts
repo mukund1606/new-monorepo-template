@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-import type { ORPCReactUtils } from "./orpc";
+import type { ORPCReactUtils } from ".";
 
 export const ORPCContext = createContext<ORPCReactUtils | undefined>(undefined);
 

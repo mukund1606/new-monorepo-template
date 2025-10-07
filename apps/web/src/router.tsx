@@ -7,8 +7,8 @@ import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query
 
 import DefaultLoading from "~/components/default-loading";
 import NotFound from "~/components/not-found";
+import { orpc } from "~/orpc";
 import { ORPCContext } from "~/orpc/context";
-import { orpc } from "~/orpc/orpc";
 import { getQueryClient } from "~/orpc/query-client";
 
 import { routeTree } from "./routeTree.gen";

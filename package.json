@@ -14,6 +14,7 @@
     "commit": "cz",
     "compile": "turbo compile",
     "compile:go": "turbo compile:go",
+    "db:dev": "docker compose -f docker-compose.dev.yaml up -d",
     "db:generate": "bun --env-file .env turbo -F @acme/db db:generate",
     "db:migrate": "bun --env-file .env turbo -F @acme/db db:migrate",
     "db:push": "bun --env-file .env turbo -F @acme/db db:push",
@@ -32,6 +33,7 @@
     "prepare": "husky",
     "start": "bun --env-file .env turbo run start",
     "typecheck": "turbo run typecheck",
+    "typecheck:go": "turbo run typecheck:go",
     "update-deps": "bunx taze --interactive --recursive"
   },
   "config": {

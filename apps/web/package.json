@@ -8,13 +8,13 @@
     "dev": "vite dev",
     "format": "prettier --check . --ignore-path ../../.prettierignore --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "start": "bun run .output/server/index.mjs",
-    "typecheck": "tsc --noEmit"
+    "start": "PORT=3001 bun run .output/server/index.mjs",
+    "typecheck": "tsc --noEmit",
+    "typecheck:go": "tsgo --noEmit"
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
     "@acme/auth": "workspace:*",
-    "@acme/db": "workspace:*",
     "@acme/orpc": "workspace:*",
     "@acme/shared": "workspace:*",
     "@base-ui-components/react": "1.0.0-beta.4",

@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
@@ -5,5 +6,7 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
-  return <div>Hello</div>;
+  const { orpc } = Route.useRouteContext();
+  const { data } = useQuery(orpc.healthCheck.queryOptions());
+  return <div>Hello {data}</div>;
 }

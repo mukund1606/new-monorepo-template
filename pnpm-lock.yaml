@@ -42,6 +42,61 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  apps/server:
+    dependencies:
+      '@acme/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
+      '@acme/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@acme/orpc':
+        specifier: workspace:*
+        version: link:../../packages/orpc
+      '@acme/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      '@orpc/openapi':
+        specifier: ^1.9.3
+        version: 1.9.3(crossws@0.4.1(srvx@0.8.13))(ws@8.18.3)
+      '@orpc/server':
+        specifier: ^1.9.3
+        version: 1.9.3(crossws@0.4.1(srvx@0.8.13))(ws@8.18.3)
+      '@orpc/zod':
+        specifier: ^1.9.3
+        version: 1.9.3(@orpc/contract@1.9.3)(@orpc/server@1.9.3(crossws@0.4.1(srvx@0.8.13))(ws@8.18.3))(crossws@0.4.1(srvx@0.8.13))(ws@8.18.3)(zod@4.1.12)
+      '@t3-oss/env-core':
+        specifier: ^0.13.8
+        version: 0.13.8(typescript@5.9.3)(zod@4.1.12)
+      hono:
+        specifier: ^4.9.10
+        version: 4.9.10
+      zod:
+        specifier: ^4.1.12
+        version: 4.1.12
+    devDependencies:
+      '@acme/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@acme/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@acme/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@types/bun':
+        specifier: ^1.2.23
+        version: 1.2.23(@types/react@19.2.2)
+      eslint:
+        specifier: ^9.37.0
+        version: 9.37.0(jiti@2.6.1)
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
   apps/web:
     dependencies:
       '@acme/auth':
@@ -4202,6 +4257,10 @@ packages:
   homedir-polyfill@1.0.3:
     resolution: {integrity: sha512-eSmmWE5bZTK2Nou4g0AI3zZ9rswp7GRKoKXS1BLUkvPviOqs4YTN1djQIqrXy9k5gEtdLPy86JjRwsNM9tnDcA==}
     engines: {node: '>=0.10.0'}
+
+  hono@4.9.10:
+    resolution: {integrity: sha512-AlI15ijFyKTXR7eHo7QK7OR4RoKIedZvBuRjO8iy4zrxvlY5oFCdiRG/V/lFJHCNXJ0k72ATgnyzx8Yqa5arug==}
+    engines: {node: '>=16.9.0'}
 
   hookable@5.5.3:
     resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
@@ -10344,7 +10403,7 @@ snapshots:
       cookie-es: 2.0.0
       fetchdts: 0.1.7
       rou3: 0.7.7
-      srvx: 0.8.9
+      srvx: 0.8.13
     optionalDependencies:
       crossws: 0.4.1(srvx@0.8.13)
 
@@ -10384,6 +10443,8 @@ snapshots:
   homedir-polyfill@1.0.3:
     dependencies:
       parse-passwd: 1.0.0
+
+  hono@4.9.10: {}
 
   hookable@5.5.3: {}
 

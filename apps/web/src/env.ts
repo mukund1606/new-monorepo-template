@@ -3,13 +3,10 @@ import { createEnv } from "@t3-oss/env-core";
 import { vercel } from "@t3-oss/env-core/presets-zod";
 import { z } from "zod";
 
-import { env as authEnv } from "@acme/auth/env";
-import { env as dbEnv } from "@acme/db/env";
-
 export const env = createEnv({
-  extends: [vercel(), authEnv, dbEnv],
+  extends: [vercel()],
   server: {
-    PORT: z.string().default("3000"),
+    PORT: z.string().default("3001"),
     STATIC_PRELOAD_MAX_BYTES: z.number().default(5 * 1024 * 1024),
     STATIC_PRELOAD_INCLUDE: z.string().default(""),
     STATIC_PRELOAD_EXCLUDE: z.string().default(""),
@@ -25,7 +22,7 @@ export const env = createEnv({
   },
   clientPrefix: "VITE_",
   client: {
-    VITE_BASE_URL: z.url().default("/"),
+    VITE_SERVER_URL: z.url().default("/"),
   },
   runtimeEnv: {
     ...process.env,

@@ -18,7 +18,8 @@
     "compile:go": "tsgo && tsc-alias",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "typecheck:go": "tsgo --noEmit"
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {

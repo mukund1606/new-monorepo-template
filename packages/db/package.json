@@ -22,7 +22,8 @@
     "db:studio": "drizzle-kit studio",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "typecheck:go": "tsgo --noEmit"
   },
   "prettier": "@acme/prettier-config",
   "dependencies": {
