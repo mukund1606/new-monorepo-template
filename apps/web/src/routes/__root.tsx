@@ -26,20 +26,20 @@ export type RouterAppContext = {
 };
 
 export const Route = createRootRouteWithContext<RouterAppContext>()({
-  // beforeLoad: async ({ context }) => {
-  //   const { orpc, queryClient } = context;
+  beforeLoad: async ({ context }) => {
+    const { orpc, queryClient } = context;
 
-  //   const user = await queryClient.fetchQuery(orpc.auth.getSession.queryOptions());
-  //   if (user?.session) {
-  //     const currentSession = {
-  //       session: user.session,
-  //       user: user.user,
-  //     } as Session;
-  //     return {
-  //       currentSession,
-  //     };
-  //   }
-  // },
+    const user = await queryClient.fetchQuery(orpc.auth.getSession.queryOptions());
+    if (user?.session) {
+      const currentSession = {
+        session: user.session,
+        user: user.user,
+      } as Session;
+      return {
+        currentSession,
+      };
+    }
+  },
   head: () => ({
     meta: [
       {
