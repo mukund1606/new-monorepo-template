@@ -1,3 +1,4 @@
+import type { PropsWithChildren } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import {
   createRouter as createTanStackRouter,
@@ -31,7 +32,7 @@ export const getRouter = () => {
     defaultPendingComponent: DefaultLoading,
     defaultNotFoundComponent: NotFound,
     defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
-    Wrap: (props: { children: React.ReactNode }) => {
+    Wrap: (props: PropsWithChildren) => {
       return (
         <QueryClientProvider client={queryClient}>
           <ORPCContext.Provider value={orpc}>{props.children}</ORPCContext.Provider>

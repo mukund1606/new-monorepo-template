@@ -61,7 +61,6 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
     ],
   }),
   component: RootDocument,
-  wrapInSuspense: true,
 });
 
 function RootDocument() {
