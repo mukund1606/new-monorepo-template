@@ -1,7 +1,7 @@
 {
   "extends": "@acme/tsconfig/compiled-package.json",
   "compilerOptions": {
-    "baseUrl": ".",
+    // "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]
     }

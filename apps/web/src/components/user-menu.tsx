@@ -26,11 +26,7 @@ export default function UserMenu() {
   }
 
   if (!session) {
-    return (
-      <Button variant="outline" asChild>
-        <Link to="/login">Sign In</Link>
-      </Button>
-    );
+    return <Button variant="outline" render={<Link to="/login">Sign In</Link>} />;
   }
 
   return (

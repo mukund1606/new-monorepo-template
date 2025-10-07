@@ -1,3 +1,6 @@
 import baseConfig, { restrictEnvAccess } from "@acme/eslint-config/base";
 
-export default [...baseConfig, ...restrictEnvAccess];
+/** @type {import("eslint").Linter.Config[]} */
+const config = [...baseConfig, ...restrictEnvAccess];
+
+export default config;

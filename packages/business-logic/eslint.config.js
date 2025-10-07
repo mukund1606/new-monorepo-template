@@ -3,4 +3,7 @@ import baseConfig, {
   restrictEnvAccess,
 } from "@acme/eslint-config/base";
 
-export default [...baseConfig, ...restrictEnvAccess, ...drizzleEslintConfig];
+/** @type {import("eslint").Linter.Config[]} */
+const config = [...baseConfig, ...restrictEnvAccess, ...drizzleEslintConfig];
+
+export default config;

@@ -15,6 +15,11 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["dist/**"]
     },
+    "compile:go": {
+      "dependsOn": ["^compile:go"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**"]
+    },
     "dev": {
       "persistent": true,
       "cache": false

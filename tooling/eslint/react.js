@@ -23,6 +23,7 @@ export default defineConfig([
     ".astro",
   ]),
   pluginReact.configs.flat.recommended ?? {},
+  // @ts-expect-error This is not typed
   pluginReactHooks.configs["recommended-latest"],
   pluginJsxA11y.flatConfigs.strict,
   ...pluginRouter.configs["flat/recommended"],

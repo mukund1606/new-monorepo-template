@@ -1,3 +1,6 @@
 import baseConfig from "@acme/eslint-config/base";
 
-export default baseConfig;
+/** @type {import("eslint").Linter.Config[]} */
+const config = baseConfig;
+
+export default config;

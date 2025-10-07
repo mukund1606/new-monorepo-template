@@ -13,9 +13,7 @@ export default function NotFound() {
           </Link>
         </p>
         <p className="text-lg">Page not found</p>
-        <Button asChild>
-          <Link to="/">Return to home</Link>
-        </Button>
+        <Button render={<Link to="/">Return to home</Link>} />
       </div>
     </div>
   );

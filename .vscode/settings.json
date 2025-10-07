@@ -24,6 +24,7 @@
 
   // always choose typescript from node_modules
   "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.experimental.useTsgo": false,
 
   // use LF line endings
   "files.eol": "\n",
