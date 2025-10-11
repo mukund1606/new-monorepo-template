@@ -1,9 +1,6 @@
 # check=skip=SecretsUsedInArgOrEnv
 # Single container for both web and server
-FROM oven/bun:1.2.22
-
-# Install pnpm alongside bun
-RUN bun add -g pnpm
+FROM oven/bun:1.3.0
 
 ARG DATABASE_URL
 ARG BETTER_AUTH_URL
@@ -24,13 +21,13 @@ WORKDIR /app
 COPY . .
 
 # Install dependencies (this will install all workspace dependencies)
-RUN pnpm install
+RUN bun install
 
 # Build all applications
-RUN pnpm run build
+RUN bun run build
 
 # Set environment
 ENV NODE_ENV=production
 
 # Start both services
-CMD ["pnpm", "run", "start"]
+CMD ["bun", "run", "start"]

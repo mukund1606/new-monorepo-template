@@ -5,16 +5,16 @@ import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
 import pluginDrizzle from "eslint-plugin-drizzle";
 import pluginImport from "eslint-plugin-import";
-import pluginPrettier from "eslint-plugin-prettier/recommended";
+// import pluginPrettier from "eslint-plugin-prettier/recommended";
 import turboPlugin from "eslint-plugin-turbo";
-import { defineConfig, globalIgnores } from "eslint/config";
+import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
 
 /**
  * All packages that leverage t3-env should use this rule
  */
 export const restrictEnvAccess = defineConfig({
-  files: ["**/*.js", "**/*.ts", "**/*.tsx"],
+  files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
   rules: {
     "no-restricted-properties": [
       "error",
@@ -41,7 +41,7 @@ export const restrictEnvAccess = defineConfig({
 export const drizzleEslintConfig = defineConfig(
   { ignores: ["**/env.ts"] },
   {
-    files: ["**/*.js", "**/*.ts", "**/*.tsx"],
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
     plugins: {
       drizzle: pluginDrizzle,
     },
@@ -60,23 +60,12 @@ export const drizzleEslintConfig = defineConfig(
 
 export default defineConfig([
   includeIgnoreFile(path.join(import.meta.dirname, "../../.gitignore")),
-  globalIgnores([
-    ".vinxi",
-    "build",
-    "dist",
-    "node_modules",
-    ".output",
-    ".nitro",
-    ".tanstack",
-    ".turbo",
-    ".astro",
-  ]),
   eslint.configs.recommended,
   tseslint.configs.strict,
   tseslint.configs.strictTypeChecked,
   tseslint.configs.stylistic,
   tseslint.configs.stylisticTypeChecked,
-  pluginPrettier,
+  // pluginPrettier,
   {
     files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
     plugins: {

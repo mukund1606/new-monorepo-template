@@ -6,22 +6,11 @@ import pluginRouter from "@tanstack/eslint-plugin-router";
 import pluginJsxA11y from "eslint-plugin-jsx-a11y";
 import pluginReact from "eslint-plugin-react";
 import pluginReactHooks from "eslint-plugin-react-hooks";
-import { defineConfig, globalIgnores } from "eslint/config";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 
 export default defineConfig([
   includeIgnoreFile(path.join(import.meta.dirname, "../../.gitignore")),
-  globalIgnores([
-    ".vinxi",
-    "build",
-    "dist",
-    "node_modules",
-    ".output",
-    ".nitro",
-    ".tanstack",
-    ".turbo",
-    ".astro",
-  ]),
   pluginReact.configs.flat.recommended ?? {},
   // @ts-expect-error This is not typed
   pluginReactHooks.configs["recommended-latest"],
@@ -53,7 +42,7 @@ export default defineConfig([
     },
   },
   {
-    files: ["**/*.{js,cjs,mjs}"],
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
     languageOptions: {
       globals: globals.browser,
     },

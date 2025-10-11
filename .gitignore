@@ -15,6 +15,11 @@ next-env.d.ts
 .nitro/
 .output/
 
+# Tanstack Start
+.vinxi
+.tanstack-start
+.tanstack
+
 # expo
 .expo/
 expo-env.d.ts
@@ -44,7 +49,12 @@ yarn-error.log*
 
 # typescript
 dist/
+dist-ssr/
 .cache
 
-# turbo
+# astro
+.astro
 .turbo
+
+
+*.local
