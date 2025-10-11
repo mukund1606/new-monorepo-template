@@ -3,8 +3,6 @@ import type { BunSQLTransaction } from "drizzle-orm/bun-sql";
 import { SQL } from "bun";
 import { drizzle } from "drizzle-orm/bun-sql";
 
-// import postgres from "postgres";
-
 import { env } from "~/env";
 import * as schema from "~/schema";
 

@@ -6,6 +6,7 @@ import { z } from "zod";
 export const env = createEnv({
   extends: [vercel()],
   server: {
+    NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
     PORT: z.string().default("3001"),
     STATIC_PRELOAD_MAX_BYTES: z.number().default(5 * 1024 * 1024),
     STATIC_PRELOAD_INCLUDE: z.string().default(""),

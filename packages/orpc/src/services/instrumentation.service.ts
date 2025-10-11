@@ -1,6 +1,6 @@
 import type { IInstrumentationService } from "@acme/business-logic/application/services/instrumentation.service.interface";
 
-import { dummyStartSpan } from "./instrumentation.utils";
+import { silentStartSpan } from "./instrumentation.utils";
 
 export class InstrumentationService implements IInstrumentationService {
   startSpan<T>(
@@ -11,6 +11,6 @@ export class InstrumentationService implements IInstrumentationService {
     },
     callback: () => T,
   ): T {
-    return dummyStartSpan(options, callback);
+    return silentStartSpan(options, callback);
   }
 }
