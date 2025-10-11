@@ -47,7 +47,7 @@
     "@acme/prettier-config": "workspace:*",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
-    "@typescript/native-preview": "^7.0.0-dev.20251010.1",
+    "@typescript/native-preview": "^7.0.0-dev.20251011.1",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.1.7",
