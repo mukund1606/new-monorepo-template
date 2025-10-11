@@ -13,7 +13,7 @@ export default defineConfig([
   includeIgnoreFile(path.join(import.meta.dirname, "../../.gitignore")),
   pluginReact.configs.flat.recommended ?? {},
   // @ts-expect-error This is not typed
-  pluginReactHooks.configs["recommended-latest"],
+  pluginReactHooks.configs["flat"]["recommended-latest"],
   pluginJsxA11y.flatConfigs.strict,
   ...pluginRouter.configs["flat/recommended"],
   ...pluginQuery.configs["flat/recommended"],
