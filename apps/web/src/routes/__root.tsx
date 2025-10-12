@@ -66,7 +66,7 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 function RootDocument() {
   const isFetching = useRouterState({ select: (s) => s.isLoading });
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>

@@ -23,7 +23,7 @@
     "@orpc/server": "^1.9.3",
     "@orpc/zod": "^1.9.3",
     "@t3-oss/env-core": "^0.13.8",
-    "hono": "^4.9.10",
+    "hono": "^4.9.11",
     "zod": "^4.1.12"
   },
   "devDependencies": {
